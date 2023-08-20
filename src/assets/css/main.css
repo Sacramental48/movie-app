@@ -8,6 +8,6 @@
     }
 
     .li-style {
-        @apply px-5 py-1 border shadow-md rounded-lg border-gray-200 cursor-pointer;
+        @apply py-2 text-xl w-full border-gray-200 cursor-pointer hover:border-gray-300 hover:bg-gray-50 select-none;
     }
 }

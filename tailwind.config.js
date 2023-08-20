@@ -8,7 +8,8 @@ module.exports = {
     theme: {
 
         screens: {
-            xs: "450px",
+            es: "280px",
+            xs: "525px",
             sm: "768px",
             md: "1024px",
             lg: "1280px",
@@ -16,7 +17,9 @@ module.exports = {
         },
 
         extend: {
-
+            filter: {
+                'drop-shadow': 'drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5))',
+            },
             colors: {
                 dim: {
                     50: "#5F99F7",
