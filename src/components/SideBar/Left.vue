@@ -1,7 +1,6 @@
 <script setup>
 import SideBarMain from './LeftMain.vue'
 import SideBarGenres from './GenresComponent.vue'
-import LogoutIcon from "@/assets/img/sidebarIcons/logout.vue";
 </script>
 
 <template>

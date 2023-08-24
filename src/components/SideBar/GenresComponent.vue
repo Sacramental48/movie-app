@@ -2,7 +2,6 @@
 import { useRouter, useRoute } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import { useMovieGenres } from '@/store/getMovieGeners'
-import Folder from "@/assets/img/sidebarIcons/folder.vue";
 import { useMovieApp } from '../../store/getMovieApp';
 
 const route = useRoute();

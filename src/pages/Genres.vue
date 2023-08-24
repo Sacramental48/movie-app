@@ -11,13 +11,13 @@ const genresApp = useMovieGenres();
 
 const currentPageCount = ref(0);
 const route = useRoute();
-console.log('params.genre at Genres.vue', route.params.genre);
-console.log('params.genre at Genres.vue', route.params);
-console.log('params.genre at Genres.vue', route);
+// console.log('params.genre at Genres.vue', route.params.genre);
+// console.log('params.genre at Genres.vue', route.params);
+// console.log('params.genre at Genres.vue', route);
 onMounted(async() => {
     await movieApp.getMovieData();
     await genresApp.getMovieGenres();
-    console.log(filteredMovies.value);
+    // console.log(filteredMovies.value);
 });
 
 
