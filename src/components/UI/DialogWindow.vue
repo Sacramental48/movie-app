@@ -14,7 +14,7 @@
 
 <template>
     <div v-if="show" @click="hideDialog" class="flex fixed inset-0 bg-black/[0.6]">
-        <div class="m-auto bg-white w-3/5" @click.stop>
+        <div class="m-auto bg-white xs:w-3/5 w-4/5" @click.stop>
             <slot />
         </div>
     </div>

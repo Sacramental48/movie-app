@@ -5,8 +5,8 @@ export const useTVShow = defineStore('TVShow', {
     state: () => ({
         data: [],
         totalPages: 500,
-        sortBy: localStorage.getItem('selectedSort') || 'popularity.desc',
-        currentPage: localStorage.getItem('currentPage') || 1,
+        sortBy: sessionStorage.getItem('selectedSortSerials') || 'popularity.desc',
+        currentPageSerials: sessionStorage.getItem('currentPageSerials') || 1,
     }),
     getters: {
         getTotalPage: state => state.totalPages,
@@ -36,6 +36,14 @@ export const useTVShow = defineStore('TVShow', {
             }catch(error) {
                 console.error(error);
             }
-        }
+        },
+
+        setCurrentPage(page) {
+            sessionStorage.setItem('currentPageSerials', page);
+        },
+
+        setSortSerials(value) {
+            sessionStorage.setItem('selectedSortSerials', value);
+        },
     }
 })

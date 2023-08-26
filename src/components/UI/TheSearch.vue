@@ -14,8 +14,8 @@ const emit = defineEmits(['update:modelValue'])
 
 <template>
     <div class="flex border h-8">
-        <button @click="someFunction"><img src="@/assets/img/search.svg" alt="search" class="w-8 h-full cursor-pointer"></button>
-        <input type="text" placeholder="Input" :value="props.modelValue" @input="$emit('update:modelValue', $event.target.value)" class="md:w-72 xs:w-60 block h-full sm:text-md outline-none">
+            <img src="../../assets/img/search.svg" alt="search" class="w-8 h-full cursor-pointer" @click="someFunction">
+        <input type="text" placeholder="Input" :value="props.modelValue" @input="$emit('update:modelValue', $event.target.value)" class="w-full block h-full sm:text-md outline-none">
         <slot></slot>
     </div>
 </template>

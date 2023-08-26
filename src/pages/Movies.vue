@@ -11,32 +11,30 @@ import SortSelect from '../components/SortSelect.vue';
 const route = useRoute();
 const movieApp = useMovieApp();
 const currentPageCount = ref(null)
-console.log(route);
+
 onMounted(async() => {
     await movieApp.getMovieData();
-    currentPageCount.value = movieApp.currentPage;
+    currentPageCount.value = movieApp.currentPageMovie;
 });
-
-console.log(movieApp.data);
-
+console.log(route.params);
 </script>
 
 <template>
     <div class="flex flex-col justify-center">
-        <div class="flex justify-between py-4">
+        <div class="flex justify-between items-center py-4">
             <p class="text-2xl">Movies</p>
             <div class="flex">
-                <SortSelect></SortSelect>
+                <SortSelect :data="movieApp"></SortSelect>
             </div>
         </div>
         <div class="flex justify-center">
-            <div class="flex flex-col items-center xs:w-full w-[260px]">
+            <div class="flex flex-col items-center">
                 <div class="grid grid-cols-12 gap-4 justify-items-center">
                         <div v-for="item in movieApp.data" :key="item.id" class="xl:col-span-2 md:col-span-4 xs:col-span-6 es:col-span-12 ">
                             <HomeMovieCards :item="item" :media="route.name"/>
                         </div>
                 </div>
-                <PaginationPage :currentPageCount="currentPageCount"/>
+                <PaginationPage :currentPageCount="currentPageCount" :media="route.name" :data="movieApp"/>
             </div>
         </div>
     </div>

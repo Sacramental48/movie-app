@@ -1,38 +1,39 @@
 <script setup>
-import {ref, onMounted, watch} from 'vue'
+import {ref, watch} from 'vue'
 import { useMovieApp } from '../../store/getMovieApp'
 import Paginate from "vuejs-paginate-next";
 import { useRoute, useRouter } from 'vue-router'
 
-const {currentPage, setCurrentPage, totalPages, func} = useMovieApp();
-
 const route = useRoute()
 const router = useRouter()
 
+const props = defineProps({
+    media: {
+        type: String
+    },
+    data: {
+        type: Object
+    }
+})
+
 const changePage = async (pageNum) => {
     try {
-        console.log(pageNum);
-        setCurrentPage(pageNum);
-        func();
-        // await router.push({ name: 'genre-page', params: { genre: route.params, page: currentPageCount.value } })
+        props.data.setCurrentPage(pageNum);
+        await router.push({ path: `/${props.media}/${pageNum}` });
     } catch(e) {
         console.log(e);
     } finally {
         location.reload();
     }
 }
+const currentPageCount = ref(parseInt(props.data.currentPageMovie || props.data.currentPageSerials))
 
-const currentPageCount = ref(parseInt(currentPage))
-
-onMounted(() => {
-    console.log(currentPage);
-})
 </script>
 
 <template>
     <Paginate
         v-model="currentPageCount"
-        :page-count="totalPages"
+        :page-count="props.data.totalPages"
         :click-handler="changePage"
         :container-class="'flex gap-2 flex-wrap justify-center mt-10 mb-10'"
         :page-class="'flex justify-center items-center border rounded-2xl h-10 w-10 text-sm cursor-pointer select-none'"

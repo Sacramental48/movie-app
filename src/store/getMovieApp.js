@@ -5,8 +5,8 @@ export const useMovieApp = defineStore('movie', {
     state: () => ({
         data: [],
         totalPages: 500,
-        sortBy: localStorage.getItem('selectedSort') || 'popularity.desc',
-        currentPage: localStorage.getItem('currentPage') || 1,
+        sortBy: sessionStorage.getItem('selectedSortMovie') || 'popularity.desc',
+        currentPageMovie: sessionStorage.getItem('currentPageMovie') || 1,
     }),
     getters: {
         getTotalPage: state => state.totalPages,
@@ -20,7 +20,7 @@ export const useMovieApp = defineStore('movie', {
                     include_adult: 'false',
                     include_video: 'false',
                     language: 'en-US',
-                    page: this.currentPage,
+                    page: this.currentPageMovie,
                     sort_by: this.sortBy
                 },
                 headers: {
@@ -36,10 +36,10 @@ export const useMovieApp = defineStore('movie', {
             }
         },
         setCurrentPage(page) {
-            localStorage.setItem('currentPage', page);
+            sessionStorage.setItem('currentPageMovie', page);
         },
         setSortMovie(value) {
-            localStorage.setItem('selectedSort', value);
+            sessionStorage.setItem('selectedSortMovie', value);
         },
     }
 });

@@ -1,9 +1,16 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
-import { useMovieApp } from '../store/getMovieApp'
 
-const selectSortByMovies = ref(localStorage.getItem('selectedSort') || '');
-const movieStore = useMovieApp();
+const props = defineProps({
+    data: {
+        type: Object
+    }
+})
+
+const selectSort = ref('');
+const hasSort = computed(() => {
+    selectSort.value = selectSort ? 'Select your option' : sessionStorage.getItem('selectedSortMovie') || sessionStorage.getItem('selectedSortSerials')
+})
 
 const allOptionName = ref([
     {id: 1, value: 'popularity.asc', name: 'Popularity Asc',},
@@ -17,17 +24,26 @@ const allOptionName = ref([
     {id: 9, value: 'vote_count.asc', name: 'Vote count Asc',},
     {id: 10, value: 'vote_count.desc', name: 'Vote count Desc',},
 ]);
-
-watch(selectSortByMovies, value => {
-    localStorage.setItem('selectedSort', value);
-    movieStore.setSortMovie(value);
-    location.reload();
+console.log(props.data);
+watch(selectSort, value => {
+    if(props.data.$id === 'movie') {
+        sessionStorage.setItem('selectedSortMovie', value);
+        props.data.setSortMovie(value);
+        location.reload();
+    } else if (props.data.$id === 'TVShow') {
+        sessionStorage.setItem('selectedSortSerials', value);
+        props.data.setSortSerials(value);
+        location.reload();
+    } else {
+        return true
+    }
+    
 });
 </script>
 
 <template>
     <div>
-        <select v-model="selectSortByMovies">
+        <select v-model="selectSort">
             <option disabled value="">Select your option: </option>
             <option v-for="item in allOptionName" :key="item.id" :value="item.value">{{item.name}}</option>
         </select>

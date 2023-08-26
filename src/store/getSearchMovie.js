@@ -4,8 +4,8 @@ import axios from 'axios'
 export const useSearchMovie = defineStore('search', {
     state: () => ({
         foundMovie: localStorage.getItem('foundMovie'),
-        sortBy: localStorage.getItem('selectedSort'),
-        currentPage: localStorage.getItem('currentPage'),
+        sortBy: sessionStorage.getItem('selectedSort'),
+        currentPage: sessionStorage.getItem('currentPage'),
     }),
 
     actions: {
@@ -34,7 +34,7 @@ export const useSearchMovie = defineStore('search', {
             }
         },
         setSearchMovie(value) {
-            localStorage.setItem('foundMovie', value);
+            sessionStorage.setItem('foundMovie', value);
         }
     }
 
