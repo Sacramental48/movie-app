@@ -3,31 +3,27 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
         path: '/',
-        redirect: '/home'
-    },
-    {
-        path: '/home',
         name: 'home',
         component: () => import('../pages/Home.vue')
     },
     {
-        path: '/movies/:id',
-        name: 'movies',
+        path: '/movie/:id',
+        name: 'movie',
         component: () => import('../pages/movies.vue')
     },
     {
-        path: '/tv-show/:id',
-        name: 'tv-show',
+        path: '/tv/:id',
+        name: 'tv',
         component: () => import('../pages/TVShow.vue')
     },
     {
-        path: '/movies/card/:id',
+        path: '/movie/card/:id',
         name: 'movieDetails',
         component: () => import('../pages/MovieDetails.vue')
     },
     {
-        path: '/tv-show/card/:id',
-        name: 'tvshow',
+        path: '/tv/card/:id',
+        name: 'tvDetails',
         component: () => import('../pages/TVShowDetails.vue')
     },
 

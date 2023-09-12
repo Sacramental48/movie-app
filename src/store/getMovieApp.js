@@ -5,7 +5,7 @@ export const useMovieApp = defineStore('movie', {
     state: () => ({
         data: [],
         totalPages: 500,
-        sortBy: sessionStorage.getItem('selectedSortMovie') || 'popularity.desc',
+        sortBy: 'popularity.desc',
         currentPageMovie: sessionStorage.getItem('currentPageMovie') || 1,
     }),
     getters: {
@@ -37,9 +37,6 @@ export const useMovieApp = defineStore('movie', {
         },
         setCurrentPage(page) {
             sessionStorage.setItem('currentPageMovie', page);
-        },
-        setSortMovie(value) {
-            sessionStorage.setItem('selectedSortMovie', value);
         },
     }
 });

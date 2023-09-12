@@ -3,38 +3,41 @@ import { useMovieApp } from '../store/getMovieApp'
 import { ref, onMounted, watch} from 'vue'
 import {useRoute} from 'vue-router'
 
-import HomeMovieCards from '../components/HomeMovieCards.vue'
-import Spinner from '../components/UI/Spinner.vue'
-import PaginationPage from '../components/UI/PaginationPage.vue'
-import SortSelect from '../components/SortSelect.vue';
+import Slider from '@/components/SliderCarousel/Slider.vue'
+import HomeMovieCards from '@/components/HomeMovieCards.vue'
+import Spinner from '@/components/UI/Spinner.vue'
+import PaginationPage from '@/components/UI/PaginationPage.vue'
+import SortSelect from '@/components/SortSelect.vue';
 
 const route = useRoute();
-const movieApp = useMovieApp();
+console.log(route.name);
+const storeMovieApp = useMovieApp();
 const currentPageCount = ref(null)
 
+
 onMounted(async() => {
-    await movieApp.getMovieData();
-    currentPageCount.value = movieApp.currentPageMovie;
+    await storeMovieApp.getMovieData();
+    currentPageCount.value = storeMovieApp.currentPageMovie;
 });
-console.log(route.params);
+
 </script>
 
 <template>
-    <div class="flex flex-col justify-center">
-        <div class="flex justify-between items-center py-4">
-            <p class="text-2xl">Movies</p>
-            <div class="flex">
-                <SortSelect :data="movieApp"></SortSelect>
-            </div>
-        </div>
-        <div class="flex justify-center">
-            <div class="flex flex-col items-center">
-                <div class="grid grid-cols-12 gap-4 justify-items-center">
-                        <div v-for="item in movieApp.data" :key="item.id" class="xl:col-span-2 md:col-span-4 xs:col-span-6 es:col-span-12 ">
-                            <HomeMovieCards :item="item" :media="route.name"/>
-                        </div>
+    <div class="flex flex-col justify-center container">
+        <Spinner v-if="storeMovieApp.data.length === 0"></Spinner>
+
+        <div v-else>
+            <div class="flex justify-between items-center py-4">
+                <p class="text-2xl text-dim-dark-gray dark:text-dim-bright">Movies</p>
+                <div class="flex">
+                    <SortSelect :data="storeMovieApp"></SortSelect>
                 </div>
-                <PaginationPage :currentPageCount="currentPageCount" :media="route.name" :data="movieApp"/>
+            </div>
+            <div class="flex flex-col justify-center w-full items-center">
+                <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <HomeMovieCards v-for="item in storeMovieApp.data" :key="item.id" :item="item" :media="route.name" />
+                </div>
+                <PaginationPage :currentPageCount="currentPageCount" :media="route.name" :data="storeMovieApp"/>
             </div>
         </div>
     </div>

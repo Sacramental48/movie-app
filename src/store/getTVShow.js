@@ -5,7 +5,7 @@ export const useTVShow = defineStore('TVShow', {
     state: () => ({
         data: [],
         totalPages: 500,
-        sortBy: sessionStorage.getItem('selectedSortSerials') || 'popularity.desc',
+        sortBy: 'popularity.desc',
         currentPageSerials: sessionStorage.getItem('currentPageSerials') || 1,
     }),
     getters: {
@@ -21,7 +21,7 @@ export const useTVShow = defineStore('TVShow', {
                     include_adult: 'false',
                     include_null_first_air_dates: 'false',
                     language: 'en-US',
-                    page: this.currentPage,
+                    page: this.currentPageSerials,
                     sort_by: this.sortBy
                 },
                 headers: {
@@ -40,10 +40,6 @@ export const useTVShow = defineStore('TVShow', {
 
         setCurrentPage(page) {
             sessionStorage.setItem('currentPageSerials', page);
-        },
-
-        setSortSerials(value) {
-            sessionStorage.setItem('selectedSortSerials', value);
         },
     }
 })

@@ -6,32 +6,39 @@ module.exports = {
     ],
     darkMode: 'class',
     theme: {
-
         screens: {
             es: "280px",
             xs: "525px",
             sm: "768px",
             md: "1024px",
-            lg: "1280px",
+            lg: "1200px",
             xl: "1440px",
         },
 
         extend: {
-            filter: {
-                'drop-shadow': 'drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5))',
+            animation: {
+                'header-up': 'header-up-ani 1s forwards',
+                'header-down': 'header-down-ani 1s forwards',
+            },
+            keyframes: {
+                'header-up-ani': {
+                    '0%': { transform: 'translateY(0)' },
+                    '100%': { transform: 'translateY(-150%)' }
+                },
+                'header-down-ani': {
+                    '0%': { transform: 'translateY(-150%)' },
+                    '100%': { transform: 'translateY(0)' }
+                },
             },
             colors: {
                 dim: {
-                    50: "#5F99F7",
-                    100: "#5F99F7",
-                    200: "#38444d",
-                    300: "#202e3a",
-                    400: "#253341",
-                    500: "#8788f9",
-                    600: "#8134f5",
-                    700: "#192734",
-                    800: "#162d40",
-                    900: "#15202b",
+                    'bright': '#ffffff',
+                    'white': '#e6e6e6',
+                    'black-blur': 'rgba(0,0,0,.25)',
+                    'gray': '#a6a6a6',
+                    'semi-dark-gray': '#4d4d4d',
+                    'dark-gray': '#262626',
+                    'color-for-rating': '#ffd24d',
                 },
             },
 
