@@ -41,33 +41,39 @@ const switchToHome = async () => {
     location.reload()
 };
 
-const onScroll = () => {
-    function hasValue(obj, value) {
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key) && obj[key] === value) {
-                return true;
-            }
+function hasValue(obj, value) {
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] === value) {
+            return true;
         }
-        return false;
     }
+    return false;
+}
 
-    if (window.pageYOffset > 200) {
+
+const onScroll = () => {
+    if (window.pageYOffset > 200 && hasValue(headerRef.value.classList, 'animate-header-down') === false) {
         headerRef.value.classList.add('animate-header-up');
     } else if(window.pageYOffset < 200 && hasValue(headerRef.value.classList, 'animate-header-up')) {
-        headerRef.value.classList.add('animate-header-down');
         headerRef.value.classList.remove('animate-header-up');
+        headerRef.value.classList.add('animate-header-down');
     } else {
-        return
+        return;
     }
 };
 
 const handleMouseWheel = (event) => {
     let delta = event.deltaY;
-    console.log(event.deltaY);
-    if (delta < 0) {
+    if (delta < 0 && hasValue(headerRef.value.classList, 'animate-header-up')) {
+        headerRef.value.classList.remove('animate-header-up');
         headerRef.value.classList.add('animate-header-down');
-    } else if(delta > 0) {
+        console.log('Удалить хедер');
+    } else if(delta > 0 && hasValue(headerRef.value.classList, 'animate-header-down') && window.pageYOffset > 200) {
         headerRef.value.classList.remove('animate-header-down');
+        headerRef.value.classList.add('animate-header-up');
+        console.log('я работаю в случае выполнения 3-х пунктов!');
+    } else { 
+        return;
     }
 }
 
