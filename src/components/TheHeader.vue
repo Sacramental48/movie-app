@@ -18,9 +18,15 @@ const movieItem = ref('')
 const isvisibleInput = ref(false);
 const router = useRouter()
 const headerRef = ref(null);
+const activeTham = ref(null)
 
 function searchMovieFunc() {
     movieApp.setSearchMovie(movieItem.value);
+}
+
+function getCurrentValueFromHamburgerTham(value) {
+    activeTham.value = value;
+    console.log(activeTham.value);
 }
 
 const navigationLinks = ref([
@@ -67,11 +73,9 @@ const handleMouseWheel = (event) => {
     if (delta < 0 && hasValue(headerRef.value.classList, 'animate-header-up')) {
         headerRef.value.classList.remove('animate-header-up');
         headerRef.value.classList.add('animate-header-down');
-        console.log('Удалить хедер');
-    } else if(delta > 0 && hasValue(headerRef.value.classList, 'animate-header-down') && window.pageYOffset > 200) {
+    } else if(delta > 0 && hasValue(headerRef.value.classList, 'animate-header-down') && window.pageYOffset > 200 && !activeTham.value) {
         headerRef.value.classList.remove('animate-header-down');
         headerRef.value.classList.add('animate-header-up');
-        console.log('я работаю в случае выполнения 3-х пунктов!');
     } else { 
         return;
     }
@@ -115,7 +119,7 @@ onBeforeUnmount(() => {
                             <TheSearch v-model="movieItem"></TheSearch>
                         </DiologWindow>
                     </div>
-                <Hamburger :links="navigationLinks" />
+                <Hamburger :links="navigationLinks" @isActiv-handle="getCurrentValueFromHamburgerTham"/>
             </div>
         </div>
     </div>

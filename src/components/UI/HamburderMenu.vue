@@ -6,6 +6,8 @@ const router = useRouter();
 
 const isActive = ref(false);
 
+const emit = defineEmits(['isActiv-handle'])
+
 const props = defineProps({
     links: {
         type: Object,
@@ -15,6 +17,7 @@ const props = defineProps({
 
 const toggleTham = () => {
     isActive.value = !isActive.value;
+    emit('isActiv-handle', isActive.value)
 };
 
 const routerPush = (item) => {
