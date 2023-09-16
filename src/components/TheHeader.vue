@@ -26,7 +26,6 @@ function searchMovieFunc() {
 
 function getCurrentValueFromHamburgerTham(value) {
     activeTham.value = value;
-    console.log(activeTham.value);
 }
 
 const navigationLinks = ref([
@@ -44,7 +43,6 @@ const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     await router.push({ path: '/' });
-    location.reload()
 };
 
 function hasValue(obj, value) {
