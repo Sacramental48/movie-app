@@ -1,19 +1,19 @@
 <script setup>
-import { useSearchMovie } from '../store/getSearchMovie';
+import { useSearchResult } from '@/store/getSearchResult';
 import { ref, onMounted, watch, onBeforeUnmount } from 'vue';
-import ImageLogo from '@/components/Images/ImageLogo.vue';
-import ImageSearch from '@/components/Images/ImageSearch.vue';
+import { useMovieApp } from '@/store/getMovieApp';
+import { useTVShow } from '@/store/getTVShow';
+import { useRouter } from 'vue-router';
 
-import DiologWindow from './UI/DialogWindow.vue';
+import ImageSearch from '@/components/Images/ImageSearch.vue';
+import ImageLogo from '@/components/Images/ImageLogo.vue';
+import DialogWindow from './UI/DialogWindow.vue';
 import Hamburger from './UI/HamburderMenu.vue';
 import TheSearch from './UI/TheSearch.vue';
-import { useMovieApp } from '../store/getMovieApp';
-import { useTVShow } from '../store/getTVShow';
-import { useRouter } from 'vue-router';
 
 const storeMovieApp = useMovieApp();
 const storeTvShow = useTVShow();
-const searchMovie = useSearchMovie();
+const storeSearchResult = useSearchResult();
 const movieItem = ref('')
 const isvisibleInput = ref(false);
 const router = useRouter()
@@ -113,9 +113,9 @@ onBeforeUnmount(() => {
                         <button class="h-8 xs:hidden flex" @click="isvisibleInput = true">
                             <!-- <img class="w-8 h-8" src="../assets/img/search.svg" alt=""> -->
                         </button>
-                        <DiologWindow :show="isvisibleInput" @update:show="isvisibleInput = $event">
+                        <DialogWindow :show="isvisibleInput" @update:show="isvisibleInput = $event">
                             <TheSearch v-model="movieItem"></TheSearch>
-                        </DiologWindow>
+                        </DialogWindow>
                     </div>
                 <Hamburger :links="navigationLinks" @isActiv-handle="getCurrentValueFromHamburgerTham"/>
             </div>

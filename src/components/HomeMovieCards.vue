@@ -21,8 +21,6 @@ const scrollTop = ref(0);
 const findSelectedCard = () => {
     router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
 }
-console.log(props.item.profile_path);
-console.log(props.item.profile_path);
 </script>
 
 <template>
