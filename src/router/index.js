@@ -26,7 +26,6 @@ const routes = [
         name: 'tvDetails',
         component: () => import('../pages/TVShowDetails.vue')
     },
-
 ]
 
 const router = createRouter({

@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="flex justify-center h-[44px] dark:bg-dim-black-blur bg-white fixed z-10 w-full" ref="headerRef">
+    <div class="flex justify-center h-[44px] dark:bg-dim-black-blur bg-white fixed z-20 w-full" ref="headerRef">
         <div class="flex gap-4 w-full container items-center">
                 <div class="flex w-full justify-between">
                     <div class="flex items-center gap-2 cursor-pointer" @click="switchToHome">

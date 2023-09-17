@@ -5,7 +5,7 @@ import CircleProgress from "vue3-circle-progress";
 
 const props = defineProps({
     rating: {
-        type: Number,
+        type: Number || String,
         required: true,
     }
 })
@@ -19,7 +19,6 @@ const changeRating = computed(() => {
 
 <template>
     <div class="flex justify-center items-center text-3xl border rounded-full">
-        <!-- <span>{{ rating }}</span>  -->
         <circle-progress :percent="changeRating"
         :size="60"
         :border-width="4"

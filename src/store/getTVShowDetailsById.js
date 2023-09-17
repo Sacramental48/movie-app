@@ -10,7 +10,7 @@ export const useTVShowDetailsById = defineStore('details-TVShow', {
     }),
 
     actions: {
-        async getDetailsMovieById() {
+        async getDetailsTvById() {
             const config = {
                 method: 'GET',
                 url: `https://api.themoviedb.org/3/tv/${this.currentId}`,
@@ -21,8 +21,8 @@ export const useTVShowDetailsById = defineStore('details-TVShow', {
                 }
             };
             try {
-                const response = await axios.request(config)
-                this.currentData = response.data
+                const response = await axios.request(config);
+                this.currentData = response.data;
             } catch(error) {
                 console.log(error);
             }

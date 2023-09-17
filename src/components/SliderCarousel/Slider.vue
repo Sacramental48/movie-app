@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import HomeMovieCards from '../HomeMovieCards.vue'
 import 'vue3-carousel/dist/carousel.css'
 
@@ -41,20 +41,15 @@ const breakpoints = ref({
         itemsToScroll: 5,
         snapAlign: 'start',
     },
-    1200: {
-        itemsToShow: 6,
-        itemsToScroll: 6,
-        snapAlign: 'start',
-    },
 })
 </script>
 
 <template>
     <div class="flex flex-col">
         <Carousel v-bind="settings" :breakpoints="breakpoints">
-                <Slide v-for="item in props.getDataFromStores" :key="item.id">
-                        <HomeMovieCards :item="item" :media="props.media"/>
-                </Slide>
+            <Slide v-for="item in props.getDataFromStores" :key="item.id">
+                <HomeMovieCards :item="item" :media="props.media"/>
+            </Slide>
         </Carousel>
     </div>
 </template>

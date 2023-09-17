@@ -24,9 +24,9 @@ onMounted( async() => {
 </script>
 
 <template>
-    <div class="flex flex-col container">
+    <div class="flex flex-col container pt-32">
         <Spinner v-if="storeTrending.data.length === 0 && storeTopMovie.data.length === 0 && storeTopSerials.data.length === 0"/>
-        <div class="flex flex-col" v-else>
+        <div class="flex flex-col">
             <div class="flex flex-col items-center mb-24">
                 <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>

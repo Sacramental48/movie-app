@@ -23,15 +23,13 @@ onMounted(async() => {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center container">
+    <div class="flex flex-col justify-center container pt-32">
         <Spinner v-if="storeMovieApp.data.length === 0"></Spinner>
 
         <div v-else>
             <div class="flex justify-between items-center py-4">
                 <p class="text-2xl text-dim-dark-gray dark:text-dim-bright">Movies</p>
-                <div class="flex">
-                    <SortSelect :data="storeMovieApp"></SortSelect>
-                </div>
+                <SortSelect :data="storeMovieApp"></SortSelect>
             </div>
             <div class="flex flex-col justify-center w-full items-center">
                 <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">

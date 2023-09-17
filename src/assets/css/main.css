@@ -10,7 +10,7 @@
     .li-style {
         @apply py-2 text-xl w-full border-gray-200 cursor-pointer select-none;
     }
-    .carousel__track {
-        @apply flex gap-4
+    .carousel__slide {
+        @apply pr-4;
     }
 }
