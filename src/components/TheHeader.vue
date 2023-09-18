@@ -95,7 +95,6 @@ onBeforeUnmount(() => {
         <div class="flex gap-4 w-full container items-center">
                 <div class="flex w-full justify-between">
                     <div class="flex items-center gap-2 cursor-pointer" @click="switchToHome">
-                        <!-- <img src="../assets/img/logo/logo.png" alt="logo" class="w-9"> -->
                         <ImageLogo></ImageLogo>
                         <p class="text-xl dark:text-dim-white text-black">MovieApp</p>
                     </div>

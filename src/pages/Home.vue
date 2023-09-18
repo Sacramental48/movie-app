@@ -1,6 +1,6 @@
 <script setup>
 import { useAllTrending } from '@/store/getAllTrending'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
 import { useTopRatedMovie } from '@/store/getTopRatedMovie'
 import { useTopRatedSerials } from '@/store/getTopRatedSerials'
 import { useSearchResult } from '@/store/getSearchResult';
@@ -9,14 +9,13 @@ import Slider from '@/components/SliderCarousel/Slider.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import SearchResult from '@/components/UI/SearchResult.vue';
 
-const isvisibleInput = ref(false);
+const isVisibleInput = ref(false);
 const storeTrending = useAllTrending();
 const storeTopMovie = useTopRatedMovie();
 const storeTopSerials = useTopRatedSerials();
 const storeSearchResult = useSearchResult();
 const searchContent = ref('')
 const isInput = ref(null);
-
 
 onMounted( async() => {
     await storeTrending.getAllTrendingList();
@@ -27,22 +26,22 @@ onMounted( async() => {
 });
 
 watch(searchContent, async val => {
-    if(val) {
-        isvisibleInput.value = true;
-        storeSearchResult.currentRequest = val;
-        await storeSearchResult.getSearchResult();
-    }
+    storeSearchResult.currentRequest = val;
+    await storeSearchResult.getSearchResult();
 
-    if(val.length === 0) {
-        isvisibleInput.value = false
+    if (val.length !== 0) {
+        await nextTick();
+        isVisibleInput.value = true;
+    } else {
+        isVisibleInput.value = false;
     }
 });
 
 const closeMenu = (event) => {
-    if(isvisibleInput.value && event.srcElement.tagName !== 'INPUT') {
-        isvisibleInput.value = false;
-    } else if(!isvisibleInput.value && event.srcElement.tagName === 'INPUT' && storeSearchResult.dataSearchResult.length !== 0) {
-        isvisibleInput.value = true;
+    if(isVisibleInput.value && event.srcElement.tagName !== 'INPUT') {
+        isVisibleInput.value = false;
+    } else if(!isVisibleInput.value && event.srcElement.tagName === 'INPUT' && storeSearchResult.dataSearchResult.length !== 0) {
+        isVisibleInput.value = true;
     } else {
         return;
     }
@@ -62,7 +61,7 @@ onUnmounted(() => {
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="w-full max-w-screen-sm relative">
                     <input type="text" class="w-full text-lg rounded-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
-                        <SearchResult :data="storeSearchResult.dataSearchResult" v-if="isvisibleInput" />
+                        <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>
             <div class="flex flex-col gap-14">

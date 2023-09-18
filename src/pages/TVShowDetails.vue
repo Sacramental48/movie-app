@@ -41,8 +41,8 @@ const formattedBudget = computed(() => {
 
 <template>
     <div class="relative">
-        <div class="w-full h-full top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
-            <img class="h-full w-full object-cover object-center" :src="`https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.backdrop_path}`" alt="backdrop image">
+        <div class="w-full h-screen top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
+            <img class="w-full h-full object-cover object-center" :src="`https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.backdrop_path}`" alt="backdrop image">
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
         <div class="flex flex-col justify-center items-center mt-10 container pt-32">
