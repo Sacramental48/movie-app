@@ -5,31 +5,48 @@ import CircleProgress from "vue3-circle-progress";
 
 const props = defineProps({
     rating: {
-        type: Number || String,
+        type: [Number, String],
         required: true,
     }
-})
+});
 
 const changeRating = computed(() => {
-    console.log(props.rating);
     return props.rating * 10
-})
+});
 
+const changeColor = computed(() => {
+    if(props.rating >= 7 && props.rating <= 10) {
+        console.log('green');
+        return '#00AB00';
+    }
+
+    if(props.rating >= 5 && props.rating <= 6.9) {
+        console.log('yellow');
+        return '#ffff00';
+    }
+
+    if(props.rating >= 0 && props.rating <= 4.9) {
+        console.log('red');
+        return '#EE0303';
+    }
+
+});
 </script>
 
 <template>
     <div class="flex justify-center items-center text-3xl border rounded-full">
         <circle-progress :percent="changeRating"
-        :size="60"
-        :border-width="4"
-        :border-bg-width="6"
-        :is-gradient="true"
-        :gradient="{
-            angle: 90,
-            startColor: '#ff0000',
-            stopColor: '#ffff00'
-        }"
+            :size="60"
+            :border-width="7"
+            :border-bg-width="7"
+            :is-gradient="true"
+            :fill-color="changeColor"
+            :gradient="{
+                angle: 90,
+                startColor: changeColor,
+                stopColor: changeColor
+            }"
         />
-        <p class="text-md font-bold absolute text-dim-white text-xl/3">{{props.rating}}</p>
+        <p class="text-md font-bold absolute text-dim-white text-xl/3">{{ props.rating }}</p>
     </div>
 </template>

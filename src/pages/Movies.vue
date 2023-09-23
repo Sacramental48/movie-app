@@ -32,7 +32,7 @@ onMounted(async() => {
                 <SortSelect :data="storeMovieApp"></SortSelect>
             </div>
             <div class="flex flex-col justify-center w-full items-center">
-                <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     <HomeMovieCards v-for="item in storeMovieApp.data" :key="item.id" :item="item" :media="route.name" />
                 </div>
                 <PaginationPage :currentPageCount="currentPageCount" :media="route.name" :data="storeMovieApp"/>

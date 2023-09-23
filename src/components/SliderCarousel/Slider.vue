@@ -48,7 +48,9 @@ const breakpoints = ref({
     <div class="flex flex-col">
         <Carousel v-bind="settings" :breakpoints="breakpoints">
             <Slide v-for="item in props.getDataFromStores" :key="item.id">
-                <HomeMovieCards :item="item" :media="props.media"/>
+                <div class="pr-4 overflow-hidden">
+                    <HomeMovieCards :item="item" :media="props.media" />
+                </div>
             </Slide>
         </Carousel>
     </div>

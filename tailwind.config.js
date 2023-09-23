@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    important: true,
     content: [
         "./src/**/*.{html, js, ts, vue}", 
         "./src/**/*"
@@ -39,6 +40,7 @@ module.exports = {
                     'semi-dark-gray': '#4d4d4d',
                     'dark-gray': '#262626',
                     'color-for-rating': '#ffd24d',
+                    'lazy-load': '#333333',
                 },
             },
 

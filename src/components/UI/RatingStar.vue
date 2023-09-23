@@ -4,7 +4,7 @@ import { formattedRating } from '@/use/formattedRating'
 
 const props = defineProps({
     rating: {
-        type: Number,
+        type: Number || String,
         required: true,
     }
 })

@@ -11,6 +11,10 @@
         @apply py-2 text-xl w-full border-gray-200 cursor-pointer select-none;
     }
     .carousel__slide {
-        @apply pr-4;
+        @apply items-baseline !important;
+    }
+    img[lazy=loading] {
+        @apply max-w-xl min-h-[324px] max-h-min dark:bg-dim-lazy-load blur-sm overflow-hidden;
     }
 }
+

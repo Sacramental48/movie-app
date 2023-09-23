@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { useMovieDetailsById } from '@/store/getMovieDetailsById'
 import { useMovieCredits } from '@/store/getMovieCredits'
 import { useRoute } from 'vue-router'
@@ -14,7 +14,7 @@ import Spinner from '@/components/UI/Spinner.vue'
 const route = useRoute();
 const storeMovieDetails = useMovieDetailsById();
 const storeMovieCredits = useMovieCredits();
-const notFound = new URL('../assets/img/notFound.jpg', import.meta.url);
+const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
 
 onMounted(async() => {
     storeMovieDetails.currentId = route.params.id;
@@ -22,6 +22,10 @@ onMounted(async() => {
     await storeMovieDetails.getDetailsMovieById();
     await storeMovieCredits.getMovieCredits();
 });
+onUnmounted(() => {
+    storeMovieDetails.currentData = [];
+    storeMovieDetails.currentId = '';
+})
 
 const formattedNumber = computed(() => {
     const number = storeMovieDetails.currentData.budget;
@@ -38,16 +42,29 @@ const formattedNumber = computed(() => {
 </script>
 
 <template>
-    <div class="relative">
+    <div class="relative z-10">
         <div class="w-full h-screen top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
-            <img class="h-full w-full object-cover object-center" :src="`https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.backdrop_path}`" alt="backdrop image">
+            <img v-lazy="{ 
+                src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.backdrop_path}`,
+                error: notFound, delay: 300 }" 
+                lazy="loading"
+                class="h-full w-full object-cover object-center"
+                v-if="storeMovieDetails.currentData.backdrop_path"
+            />
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
         <div class="flex flex-col justify-center items-center container pt-32">
             <Spinner v-if="storeMovieDetails.currentData.length === 0"></Spinner>
             <div class="flex gap-8 sm:flex-row flex-col z-10" v-else>
-                <div class="flex xs:justify-center justify-start">
-                    <img :src="storeMovieDetails.currentData.poster_path ? `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.poster_path}`  : `${notFound}`" alt="image" class="xs:h-[600px] h-[400px] max-w-md rounded-lg">
+                <div class="flex w-full xs:h-[600px] h-[400px] xs:justify-center justify-start">
+                    <img v-lazy="{ 
+                        src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.poster_path}`, 
+                        error: notFound, delay: 300 }" 
+                        lazy="loading"
+                        laxy="loaded"
+                        class="h-full aspect-[1/1.5] max-w-md rounded-lg"
+                        v-if="storeMovieDetails.currentData.poster_path"
+                    />
                 </div>
                 <div class="flex flex-col">
                     <div>
