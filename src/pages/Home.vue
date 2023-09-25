@@ -8,6 +8,7 @@ import { useSearchResult } from '@/store/getSearchResult';
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import SearchResult from '@/components/UI/SearchResult.vue';
+import ImageSearch from '@/components/Images/ImageSearch.vue'
 
 const isVisibleInput = ref(false);
 const storeTrending = useAllTrending();
@@ -21,7 +22,7 @@ onMounted( async() => {
     await storeTrending.getAllTrendingList();
     await storeTopMovie.getTopRated();
     await storeTopSerials.getTopRated();
-
+    document.title = 'MovieApp'
     window.addEventListener('click', closeMenu);
 });
 
@@ -59,9 +60,10 @@ onUnmounted(() => {
             <div class=" flex flex-col items-center mb-24">
                 <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
-                <div class="w-full max-w-screen-sm relative">
-                    <input type="text" class="w-full text-lg rounded-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
-                        <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
+                <div class="flex w-full max-w-screen-sm relative">
+                    <input type="text" class="w-full text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
+                    <button class="dark:bg-dim-semi-dark-gray rounded-r-full w-10"><ImageSearch></ImageSearch></button>
+                    <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>
             <div class="flex flex-col gap-14">

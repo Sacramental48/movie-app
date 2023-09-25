@@ -32,7 +32,19 @@ const router = createRouter({
     history: createWebHistory(import.meta.BASE_URL),
     routes,
     linkExactActiveClass: 'active',
-    linkActiveClass: 'active'
-})
+    linkActiveClass: 'active',
+
+    scrollBehavior (to, from, savedPosition) {
+        return { top: 0 }
+    }
+});
+
+let isPageReload = false;
+
+
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title || 'MovieApp';
+    next();
+});
 
 export default router

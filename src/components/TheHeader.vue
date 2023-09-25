@@ -25,6 +25,7 @@ function searchMovieFunc() {
 }
 
 function getCurrentValueFromHamburgerTham(value) {
+    console.log(value);
     activeTham.value = value;
 }
 
@@ -56,24 +57,32 @@ function hasValue(obj, value) {
 
 
 const onScroll = () => {
-    if (window.pageYOffset > 200 && hasValue(headerRef.value.classList, 'animate-header-down') === false) {
-        headerRef.value.classList.add('animate-header-up');
-    } else if(window.pageYOffset < 200 && hasValue(headerRef.value.classList, 'animate-header-up')) {
-        headerRef.value.classList.remove('animate-header-up');
-        headerRef.value.classList.add('animate-header-down');
-    } else {
-        return;
-    }
+    if(!activeTham.value) {
+        const pageYOffset = window.pageYOffset;
+        const headerClassList = headerRef.value.classList;
+
+        if (pageYOffset > 200 && hasValue(headerClassList, 'animate-header-down') === false) {
+            headerClassList.add('animate-header-up');
+        } else if(pageYOffset < 200 && hasValue(headerClassList, 'animate-header-up')) {
+            headerClassList.remove('animate-header-up');
+            headerClassList.add('animate-header-down');
+        } else {
+            return;
+        }
+    } return;
 };
 
 const handleMouseWheel = (event) => {
     let delta = event.deltaY;
-    if (delta < 0 && hasValue(headerRef.value.classList, 'animate-header-up')) {
-        headerRef.value.classList.remove('animate-header-up');
-        headerRef.value.classList.add('animate-header-down');
-    } else if(delta > 0 && hasValue(headerRef.value.classList, 'animate-header-down') && window.pageYOffset > 200 && !activeTham.value) {
-        headerRef.value.classList.remove('animate-header-down');
-        headerRef.value.classList.add('animate-header-up');
+    const pageYOffset = window.pageYOffset;
+    const headerClassList = headerRef.value.classList;
+
+    if (delta < 0 && hasValue(headerClassList, 'animate-header-up')) {
+        headerClassList.remove('animate-header-up');
+        headerClassList.add('animate-header-down');
+    } else if(delta > 0 && hasValue(headerClassList, 'animate-header-down') && pageYOffset > 200 && !activeTham.value) {
+        headerClassList.remove('animate-header-down');
+        headerClassList.add('animate-header-up');
     } else { 
         return;
     }
@@ -91,31 +100,31 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="flex justify-center h-[44px] dark:bg-dim-black-blur bg-white fixed z-20 w-full" ref="headerRef">
+    <div class="flex justify-center h-[44px] dark:bg-dim-black-blur bg-white backdrop-blur-sm fixed z-20 w-full" ref="headerRef" :class="{'backdrop-blur-none': !activeTham, 'dark:bg-dim-dark-gray': activeTham}">
         <div class="flex gap-4 w-full container items-center">
-                <div class="flex w-full justify-between">
-                    <div class="flex items-center gap-2 cursor-pointer" @click="switchToHome">
-                        <ImageLogo></ImageLogo>
-                        <p class="text-xl dark:text-dim-white text-black">MovieApp</p>
-                    </div>
-                    <div class="sm:flex hidden gap-4">
-                        <div v-for="item in navigationLinks" :key="item" >
-                            <div class="flex items-center gap-2 li-style" @click="switchContent(item.path)">
-                                <p class="xs:text-xl text-sm dark:text-dim-white text-black">{{item.name}}</p>
-                            </div>
+            <div class="flex w-full justify-between">
+                <div class="flex items-center gap-2 cursor-pointer" @click="switchToHome">
+                    <ImageLogo></ImageLogo>
+                    <p class="text-xl dark:text-dim-white text-black">MovieApp</p>
+                </div>
+                <div class="sm:flex hidden gap-4">
+                    <div v-for="item in navigationLinks" :key="item" >
+                        <div class="flex items-center gap-2 li-style" @click="switchContent(item.path)">
+                            <p class="xs:text-xl text-sm dark:text-dim-white text-black">{{item.name}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="flex h-full items-center">
-                    <div class="flex justify-end h-full max-sm:mr-4">
-                        <ImageSearch></ImageSearch>
-                        <button class="h-8 xs:hidden flex" @click="isvisibleInput = true">
-                            <!-- <img class="w-8 h-8" src="../assets/img/search.svg" alt=""> -->
-                        </button>
-                        <DialogWindow :show="isvisibleInput" @update:show="isvisibleInput = $event">
-                            <TheSearch v-model="movieItem"></TheSearch>
-                        </DialogWindow>
-                    </div>
+            </div>
+            <div class="flex h-full items-center">
+                <div class="flex justify-end h-full max-sm:mr-4">
+                    <ImageSearch></ImageSearch>
+                    <button class="h-8 xs:hidden flex" @click="isvisibleInput = true">
+                        <!-- <img class="w-8 h-8" src="../assets/img/search.svg" alt=""> -->
+                    </button>
+                    <DialogWindow :show="isvisibleInput" @update:show="isvisibleInput = $event">
+                        <TheSearch v-model="movieItem"></TheSearch>
+                    </DialogWindow>
+                </div>
                 <Hamburger :links="navigationLinks" @isActiv-handle="getCurrentValueFromHamburgerTham"/>
             </div>
         </div>
