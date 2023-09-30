@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # ingore .env
-.env.*
+.env
 
 #ignore .vscode
 .vscode
