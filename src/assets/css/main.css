@@ -15,12 +15,8 @@
         @apply items-baseline !important;
     }
 
-    /* .plyr__controls { */
-        /* @apply --plyr-font-size-large */
-    /* } */
-
     img[lazy=loading] {
-        @apply max-w-xl min-h-[324px] max-h-min dark:bg-dim-lazy-load blur-sm overflow-hidden;
+        @apply max-w-xl min-h-[240px] max-h-min dark:bg-dim-lazy-load blur-sm overflow-hidden;
     }
 
     body {

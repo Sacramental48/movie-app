@@ -2,6 +2,7 @@
 import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { useTVShowDetailsById } from '../store/getTVShowDetailsById'
 import { useTvCredits } from '@/store/getTvCredits'
+import { useTvVideo } from '@/store/getVideoLineForTv'
 import { useRoute } from 'vue-router'
 import { formatDate } from '@/use/formatDate'
 import { formatDuration } from '@/use/runtimeFormatted'
@@ -14,15 +15,18 @@ import Spinner from '../components/UI/Spinner.vue'
 
 const route = useRoute();
 const storeTVShowDetails = useTVShowDetailsById();
+const storeTvVideo = useTvVideo();
 const storeTvCredits = useTvCredits();
 const getCurrentData = ref([])
-const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
+const notFound = new URL('../assets/img/noPictureAvailable.jpg', import.meta.url);
 
 onMounted(async() => {
     storeTVShowDetails.currentId = route.params.id
     storeTvCredits.currentId = route.params.id
+    storeTvVideo.currentId = route.params.id
     await storeTVShowDetails.getDetailsTvById();
     await storeTvCredits.getTvCredits();
+    await storeTvVideo.getTvVideo();
     console.log(storeTVShowDetails.currentData);
 });
 
@@ -107,12 +111,12 @@ const formattedBudget = computed(() => {
                     </div>
                 </div>
             </div>
-            <SliderWithLabel title="Cast">
+            <SliderWithLabel title="Cast" v-if="storeTvCredits.dataCast !== 0">
                 <Slider :getDataFromStores="storeTvCredits.dataCast" />
             </SliderWithLabel>
-            <!-- <SliderWithLabel title="Video">
-                <Slider :video="storeMovieVideo.currentData" />
-            </SliderWithLabel> -->
+            <SliderWithLabel title="Video" v-if="storeTvVideo.currentData.length !== 0">
+                <Slider :video="storeTvVideo.currentData" />
+            </SliderWithLabel>
         </div>
     </div>
 </template>

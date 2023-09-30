@@ -99,10 +99,10 @@ const formattedNumber = computed(() => {
                     </div>
                 </div>
             </div>
-            <SliderWithLabel title="Cast">
+            <SliderWithLabel title="Cast" v-if="storeMovieCredits.dataCast !== 0">
                 <Slider :getDataFromStores="storeMovieCredits.dataCast" />
             </SliderWithLabel>
-            <SliderWithLabel title="Video">
+            <SliderWithLabel title="Video" v-if="storeMovieVideo.currentData.length !== 0">
                 <Slider :video="storeMovieVideo.currentData" />
             </SliderWithLabel>
         </div>
