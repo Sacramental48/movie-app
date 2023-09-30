@@ -61,8 +61,8 @@ onUnmounted(() => {
                 <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="flex w-full max-w-screen-sm relative">
-                    <input type="text" class="w-full text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
-                    <button class="dark:bg-dim-semi-dark-gray rounded-r-full w-10"><ImageSearch></ImageSearch></button>
+                    <input type="text" class="outline-none w-full text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
+                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20"><ImageSearch></ImageSearch></button>
                     <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>

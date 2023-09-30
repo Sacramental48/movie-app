@@ -13,8 +13,16 @@
     .carousel__slide {
         @apply items-baseline !important;
     }
+
+    .plyr__control {
+        @apply cursor-pointer rounded-full;
+    }
+
     img[lazy=loading] {
         @apply max-w-xl min-h-[324px] max-h-min dark:bg-dim-lazy-load blur-sm overflow-hidden;
+    }
+    body {
+        @apply overflow-y-scroll;
     }
 }
 

@@ -39,9 +39,6 @@ const router = createRouter({
     }
 });
 
-let isPageReload = false;
-
-
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title || 'MovieApp';
     next();

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, onUnmounted } from 'vue'
+import { useMusicVideo } from '@/store/getVideoLineForMovie'
 import { useMovieDetailsById } from '@/store/getMovieDetailsById'
 import { useMovieCredits } from '@/store/getMovieCredits'
 import { useRoute } from 'vue-router'
@@ -8,10 +9,13 @@ import { formatDuration } from '@/use/runtimeFormatted'
 import { formattedRating } from '@/use/formattedRating'
 
 import PersonList from '@/components/PersonList.vue'
+import VideoLine from '@/components/VideoLine.vue'
 import DynamicRating from '@/components/UI/DynamicRatingColor.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 
 const route = useRoute();
+
+const storeMovieVideo = useMusicVideo();
 const storeMovieDetails = useMovieDetailsById();
 const storeMovieCredits = useMovieCredits();
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
@@ -19,13 +23,16 @@ const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url)
 onMounted(async() => {
     storeMovieDetails.currentId = route.params.id;
     storeMovieCredits.currentId = route.params.id;
+    storeMovieVideo.currentId = route.params.id;
     await storeMovieDetails.getDetailsMovieById();
     await storeMovieCredits.getMovieCredits();
+    await storeMovieVideo.getMovieVideo();
 });
+
 onUnmounted(() => {
     storeMovieDetails.currentData = [];
     storeMovieDetails.currentId = '';
-})
+});
 
 const formattedNumber = computed(() => {
     const number = storeMovieDetails.currentData.budget;
@@ -92,7 +99,8 @@ const formattedNumber = computed(() => {
                     </div>
                 </div>
             </div>
-            <PersonList :cast="storeMovieCredits.dataCast"/>
+            <PersonList :cast="storeMovieCredits.dataCast" />
+            <VideoLine :video="storeMovieVideo.currentData" :movieId="route.params.id" />
         </div>
     </div>
 </template>
