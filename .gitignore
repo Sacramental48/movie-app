@@ -10,6 +10,8 @@ lerna-debug.log*
 # ingore .env
 .env.*
 
+#ignore .vscode
+.vscode
 
 node_modules
 dist
