@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-export const useMusicVideo = defineStore('music-video', {
+export const useMovieVideo = defineStore('movie-video', {
     state: () => ({
         currentData: [],
         currentId: '',
@@ -23,7 +23,6 @@ export const useMusicVideo = defineStore('music-video', {
             try {
                 const response = await axios.request(config);
                 this.currentData = response.data.results;
-                console.log(response.data);
             } catch(error) {
                 console.log('MovieVideo: ', error);
             }

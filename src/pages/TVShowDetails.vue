@@ -7,7 +7,8 @@ import { formatDate } from '@/use/formatDate'
 import { formatDuration } from '@/use/runtimeFormatted'
 import { formattedRating } from '@/use/formattedRating'
 
-import PersonList from '@/components/PersonList.vue'
+import Slider from '@/components/SliderCarousel/Slider.vue'
+import SliderWithLabel from '@/components/SliderWithLabel.vue'
 import DynamicRating from '../components/UI/DynamicRatingColor.vue'
 import Spinner from '../components/UI/Spinner.vue'
 
@@ -57,7 +58,7 @@ const formattedBudget = computed(() => {
             />
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
-        <div class="flex flex-col justify-center items-center container pt-32">
+        <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32">
             <Spinner v-if="storeTVShowDetails.currentData.length === 0"></Spinner>
             <div class="flex gap-8 sm:flex-row flex-col w-full z-10" v-else>
                 <div class="flex justify-center xs:justify-start">
@@ -106,7 +107,12 @@ const formattedBudget = computed(() => {
                     </div>
                 </div>
             </div>
-            <PersonList :cast="storeTvCredits.dataCast"/>
+            <SliderWithLabel title="Cast">
+                <Slider :getDataFromStores="storeTvCredits.dataCast" />
+            </SliderWithLabel>
+            <!-- <SliderWithLabel title="Video">
+                <Slider :video="storeMovieVideo.currentData" />
+            </SliderWithLabel> -->
         </div>
     </div>
 </template>

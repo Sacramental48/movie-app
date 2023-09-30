@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, onUnmounted } from 'vue'
-import { useMusicVideo } from '@/store/getVideoLineForMovie'
+import { useMovieVideo } from '@/store/getVideoLineForMovie'
 import { useMovieDetailsById } from '@/store/getMovieDetailsById'
 import { useMovieCredits } from '@/store/getMovieCredits'
 import { useRoute } from 'vue-router'
@@ -15,7 +15,7 @@ import Spinner from '@/components/UI/Spinner.vue'
 
 const route = useRoute();
 
-const storeMovieVideo = useMusicVideo();
+const storeMovieVideo = useMovieVideo();
 const storeMovieDetails = useMovieDetailsById();
 const storeMovieCredits = useMovieCredits();
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
@@ -60,7 +60,7 @@ const formattedNumber = computed(() => {
             />
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
-        <div class="flex flex-col justify-center items-center container pt-32">
+        <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32">
             <Spinner v-if="storeMovieDetails.currentData.length === 0"></Spinner>
             <div class="flex gap-8 sm:flex-row flex-col z-10" v-else>
                 <div class="flex w-full xs:h-[600px] h-[400px] xs:justify-center justify-start">
