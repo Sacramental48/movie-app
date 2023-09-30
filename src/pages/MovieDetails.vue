@@ -8,8 +8,8 @@ import { formatDate } from '@/use/formatDate'
 import { formatDuration } from '@/use/runtimeFormatted'
 import { formattedRating } from '@/use/formattedRating'
 
-import PersonList from '@/components/PersonList.vue'
-import VideoLine from '@/components/VideoLine.vue'
+import Slider from '@/components/SliderCarousel/Slider.vue'
+import SliderWithLabel from '@/components/SliderWithLabel.vue'
 import DynamicRating from '@/components/UI/DynamicRatingColor.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 
@@ -99,8 +99,12 @@ const formattedNumber = computed(() => {
                     </div>
                 </div>
             </div>
-            <PersonList :cast="storeMovieCredits.dataCast" />
-            <VideoLine :video="storeMovieVideo.currentData" :movieId="route.params.id" />
+            <SliderWithLabel title="Cast">
+                <Slider :getDataFromStores="storeMovieCredits.dataCast" />
+            </SliderWithLabel>
+            <SliderWithLabel title="Video">
+                <Slider :video="storeMovieVideo.currentData" />
+            </SliderWithLabel>
         </div>
     </div>
 </template>

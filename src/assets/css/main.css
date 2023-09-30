@@ -4,23 +4,25 @@
 
 @layer components {
     .container {
-        @apply max-w-[1200px] mx-auto px-5;
+        @apply max-w-[1200px] mx-auto px-[15px];
     }
 
     .li-style {
         @apply py-2 text-xl w-full border-gray-200 cursor-pointer select-none;
     }
+
     .carousel__slide {
         @apply items-baseline !important;
     }
 
-    .plyr__control {
-        @apply cursor-pointer rounded-full;
-    }
+    /* .plyr__controls { */
+        /* @apply --plyr-font-size-large */
+    /* } */
 
     img[lazy=loading] {
         @apply max-w-xl min-h-[324px] max-h-min dark:bg-dim-lazy-load blur-sm overflow-hidden;
     }
+
     body {
         @apply overflow-y-scroll;
     }
