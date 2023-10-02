@@ -4,7 +4,7 @@ import { ref, onMounted, watch} from 'vue'
 import {useRoute} from 'vue-router'
 
 import Slider from '@/components/SliderCarousel/Slider.vue'
-import HomeMovieCards from '@/components/HomeMovieCards.vue'
+import CardForImages from '@/components/CardForImages.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import PaginationPage from '@/components/UI/PaginationPage.vue'
 import SortSelect from '@/components/SortSelect.vue';
@@ -33,7 +33,7 @@ onMounted(async() => {
             </div>
             <div class="flex flex-col justify-center w-full items-center">
                 <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <HomeMovieCards v-for="item in storeMovieApp.data" :key="item.id" :item="item" :media="route.name" />
+                    <CardForImages v-for="item in storeMovieApp.data" :key="item.id" :item="item" :media="route.name" />
                 </div>
                 <PaginationPage :currentPageCount="currentPageCount" :media="route.name" :data="storeMovieApp"/>
             </div>

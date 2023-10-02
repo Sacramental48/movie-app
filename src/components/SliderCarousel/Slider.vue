@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import HomeMovieCards from '../HomeMovieCards.vue'
-import CardWithVideos from '../CardWithVideos.vue'
+import CardForImages from '../CardForImages.vue'
+import CardForVideos from '../CardForVideos.vue'
 
 import 'vue3-carousel/dist/carousel.css'
 
@@ -78,13 +78,13 @@ const videoBreakpoints = ref({
         <Carousel v-bind="settings" :breakpoints="imageBreakpoints" v-if="props.getDataFromStores">
             <Slide v-for="item in props.getDataFromStores" :key="item.id">
                 <div class="pr-4 overflow-hidden">
-                    <HomeMovieCards :item="item" :media="props.media" />
+                    <CardForImages :item="item" :media="props.media" />
                 </div>
             </Slide>
         </Carousel>
         <Carousel v-bind="settings" :breakpoints="videoBreakpoints" v-if="props.video">
             <Slide v-for="item in props.video" :key="item.id">
-                <CardWithVideos :video="item" />
+                <CardForVideos :video="item" />
             </Slide>
         </Carousel>
     </div>
