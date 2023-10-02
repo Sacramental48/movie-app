@@ -18,6 +18,10 @@ const props = defineProps({
     video: {
         type: Object,
         required: false,
+    },
+    title: {
+        type: String,
+        required: true,
     }
 });
 
@@ -69,7 +73,8 @@ const videoBreakpoints = ref({
 </script>
 
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col container px-0">
+        <h2 class="text-2xl dark:text-dim-white mb-4">{{props.title}}</h2>
         <Carousel v-bind="settings" :breakpoints="imageBreakpoints" v-if="props.getDataFromStores">
             <Slide v-for="item in props.getDataFromStores" :key="item.id">
                 <div class="pr-4 overflow-hidden">

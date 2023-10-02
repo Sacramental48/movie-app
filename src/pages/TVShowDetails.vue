@@ -9,7 +9,6 @@ import { formatDuration } from '@/use/runtimeFormatted'
 import { formattedRating } from '@/use/formattedRating'
 
 import Slider from '@/components/SliderCarousel/Slider.vue'
-import SliderWithLabel from '@/components/SliderWithLabel.vue'
 import DynamicRating from '../components/UI/DynamicRatingColor.vue'
 import Spinner from '../components/UI/Spinner.vue'
 
@@ -114,12 +113,8 @@ const formattedBudget = computed(() => {
                     </div>
                 </div>
             </div>
-            <SliderWithLabel title="Cast" v-if="storeTvCredits.dataCast !== 0">
-                <Slider :getDataFromStores="storeTvCredits.dataCast" />
-            </SliderWithLabel>
-            <SliderWithLabel title="Video" v-if="storeTvVideo.currentData.length !== 0">
-                <Slider :video="storeTvVideo.currentData" />
-            </SliderWithLabel>
+            <Slider :getDataFromStores="storeTvCredits.dataCast" title="Cast" v-if="storeTvCredits.dataCast !== 0" />
+            <Slider :video="storeTvVideo.currentData" title="Cast" v-if="storeTvCredits.dataCast !== 0" />
         </div>
     </div>
 </template>

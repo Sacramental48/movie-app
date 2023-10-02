@@ -5,7 +5,6 @@ import { useTopRatedMovie } from '@/store/getTopRatedMovie'
 import { useTopRatedSerials } from '@/store/getTopRatedSerials'
 import { useSearchResult } from '@/store/getSearchResult';
 
-import SliderWithLabel from '@/components/SliderWithLabel.vue'
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import SearchResult from '@/components/UI/SearchResult.vue';
@@ -68,15 +67,9 @@ onUnmounted(() => {
                 </div>
             </div>
             <div class="flex flex-col gap-14">
-                <SliderWithLabel title="Weekly Trends">
-                    <Slider :getDataFromStores="storeTrending.data"></Slider>
-                </SliderWithLabel>
-                <SliderWithLabel title="Top Rated of Movie">
-                    <Slider :getDataFromStores="storeTopMovie.data" :media="'movie'"></Slider>
-                </SliderWithLabel>
-                <SliderWithLabel title="Top Rated of Serials">
-                    <Slider :getDataFromStores="storeTopSerials.data" :media="'tv'"></Slider>
-                </SliderWithLabel>
+                <Slider :getDataFromStores="storeTrending.data" title="Weekly Trends"></Slider>
+                <Slider :getDataFromStores="storeTopMovie.data" :media="'movie'" title="Top Rated of Movie"></Slider>
+                <Slider :getDataFromStores="storeTopSerials.data" :media="'tv'" title="Top Rated of Serials"></Slider>
             </div>
         </div>
     </div>
