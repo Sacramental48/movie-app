@@ -33,13 +33,12 @@ const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url)
             <p class="dark:text-dim-bright text-xl p-2" v-if="props.data.length === 0 && props.searchContent">Results not found!</p>
             <div class="flex gap-4 cursor-pointer hover:bg-dim-black-blur/20" v-for="item in props.data" :key="item.id" @click="openSelected(item.id, item.media_type)">
                 <img v-lazy="{ 
-                    src: `https://image.tmdb.org/t/p/original/${item.poster_path || item.profile_path}`, 
-                    error: notFound, delay: 300 }" 
+                    src: `https://image.tmdb.org/t/p/original/${item.poster_path || item.profile_path}`, delay: 300 }" 
                     lazy="loading"
                     class="w-full h-full max-w-[80px] min-h-[60px] rounded-lg"
                     v-if="item.poster_path !== null && item.profile_path !== null"
-                    alt="img"
                 />
+                <img class="w-full h-full max-w-[80px] min-h-[60px] rounded-lg" :src="notFound" alt="Not Found" v-else>
                 <div class="flex flex-col py-2">
                     <p class="dark:text-dim-white">{{item.title || item.name}}</p>
                     <p class="dark:text-dim-gray" v-if="findMatches(item)">{{item.original_title || item.original_name}}</p>

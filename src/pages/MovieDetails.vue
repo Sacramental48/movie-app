@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, onUnmounted } from 'vue'
+import { ref, onMounted, computed, onUnmounted, defineAsyncComponent  } from 'vue'
 import { useMovieVideo } from '@/store/getVideoLineForMovie'
 import { useMovieDetailsById } from '@/store/getMovieDetailsById'
 import { useMovieCredits } from '@/store/getMovieCredits'
@@ -30,8 +30,11 @@ onMounted(async() => {
 });
 
 onUnmounted(() => {
-    storeMovieDetails.currentData = [];
-    storeMovieDetails.currentId = '';
+    // storeMovieDetails.currentData = [];
+    // storeMovieDetails.currentId = '';
+    storeMovieDetails.$reset();
+    storeMovieCredits.$reset();
+    storeMovieVideo.$reset();
 });
 
 const formattedNumber = computed(() => {
@@ -51,13 +54,13 @@ const formattedNumber = computed(() => {
 <template>
     <div class="relative z-10">
         <div class="w-full h-screen top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
-            <img v-lazy="{ 
-                src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.backdrop_path}`,
-                error: notFound, delay: 300 }" 
+             <img v-lazy="{ 
+                src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.backdrop_path}`, delay: 300 }" 
                 lazy="loading"
                 class="h-full w-full object-cover object-center"
                 v-if="storeMovieDetails.currentData.backdrop_path"
             />
+            <div class="h-full w-full object-cover object-center dark:bg-dim-dark-gray" v-else></div>
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
         <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32">
@@ -65,13 +68,12 @@ const formattedNumber = computed(() => {
             <div class="flex gap-8 sm:flex-row flex-col z-10" v-else>
                 <div class="flex w-full xs:h-[600px] h-[400px] xs:justify-center justify-start">
                     <img v-lazy="{ 
-                        src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.poster_path}`, 
-                        error: notFound, delay: 300 }" 
+                        src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.poster_path}`, delay: 300 }" 
                         lazy="loading"
-                        laxy="loaded"
                         class="h-full aspect-[1/1.5] max-w-md rounded-lg"
                         v-if="storeMovieDetails.currentData.poster_path"
                     />
+                    <img class="h-full aspect-[1/1.5] max-w-md rounded-lg" :src="notFound" alt="Not Found" v-else>
                 </div>
                 <div class="flex flex-col">
                     <div>
@@ -102,9 +104,9 @@ const formattedNumber = computed(() => {
             <SliderWithLabel title="Cast" v-if="storeMovieCredits.dataCast !== 0">
                 <Slider :getDataFromStores="storeMovieCredits.dataCast" />
             </SliderWithLabel>
-            <SliderWithLabel title="Video" v-if="storeMovieVideo.currentData.length !== 0">
+            <!-- <SliderWithLabel title="Video" v-if="storeMovieVideo.currentData.length !== 0">
                 <Slider :video="storeMovieVideo.currentData" />
-            </SliderWithLabel>
+            </SliderWithLabel> -->
         </div>
     </div>
 </template>

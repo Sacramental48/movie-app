@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Rating from '@/components/UI/RatingStar.vue'
 const router = useRouter();
@@ -22,20 +23,22 @@ const findSelectedCard = () => {
     <div class="flex flex-col cursor-pointer" @click="findSelectedCard">
         <div class="relative w-full h-full aspect-[1/1.5]">
             <img v-lazy="{ 
-                src: `https://image.tmdb.org/t/p/original/${props.item.poster_path}`,
-                error: notFound, delay: 300 }" 
+                src: `https://image.tmdb.org/t/p/original/${props.item.poster_path || props.item.profile_path}`, delay: 300 }" 
                 lazy="loading"
                 class="w-full h-full overflow-hidden rounded-lg hover:opacity-75 duration-150"
-                v-if="props.item.poster_path !== undefined"
+                v-if="props.item.poster_path || props.item.profile_path"
             />
-
-            <img v-lazy="{ 
+            <img :src="notFound" alt="Not Found" v-else>
+            <!-- <img  class="w-full h-full overflow-hidden rounded-lg hover:opacity-75 duration-150" :src="props.item.poster_path ? `https://image.tmdb.org/t/p/original/${props.item.poster_path}` : notFound" alt="asd" v-if="props.item.poster_path !== undefined" /> -->
+            <!-- <img v-lazy="{ 
                 src: `https://image.tmdb.org/t/p/original/${props.item.profile_path}`, 
                 error: notFound, delay: 300 }" 
                 lazy="loading"
-                class="w-full h-full overflow-hidden rounded-lg hover:opacity-80 duration-150"
-                v-if="props.item.profile_path !== undefined"
-            />
+                class="w-full h-full overflow-hidden rounded-lg hover:opacity-75 duration-150"
+                v-if="props.item.profile_path"
+            /> -->
+            <!-- <img class="w-full h-full overflow-hidden rounded-lg hover:opacity-80 duration-150" :src=" props.item.profile_path ? `https://image.tmdb.org/t/p/original/${props.item.profile_path}` : notFound" alt="asd" v-if="props.item.profile_path !== undefined" /> -->
+
             <div class="flex justify-between items-end bottom-0 right-0 absolute pb-2 px-2 rounded-xl">
                 <Rating v-if="props.item.vote_average" :rating="props.item.vote_average" :release="props.item.release_date"></Rating>
             </div>

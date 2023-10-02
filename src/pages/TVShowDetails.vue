@@ -31,8 +31,11 @@ onMounted(async() => {
 });
 
 onUnmounted(() => {
-    storeTVShowDetails.currentData = [];
-    storeTVShowDetails.currentId = '';
+    // storeTVShowDetails.currentData = [];
+    // storeTVShowDetails.currentId = '';
+    storeTVShowDetails.$reset();
+    storeTvCredits.$reset();
+    storeTvVideo.$reset();
 });
 
 const formattedBudget = computed(() => {
@@ -54,12 +57,12 @@ const formattedBudget = computed(() => {
     <div class="relative z-10">
         <div class="w-full h-screen top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
             <img v-lazy="{ 
-                src: `https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.backdrop_path}`,
-                error: notFound, delay: 300 }" 
+                src: `https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.backdrop_path}`, delay: 300 }" 
                 lazy="loading"
                 class="h-full w-full object-cover object-center"
                 v-if="storeTVShowDetails.currentData.backdrop_path"
             />
+            <div class="h-full w-full object-cover object-center dark:bg-dim-dark-gray" v-else></div>
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
         <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32">
@@ -67,12 +70,12 @@ const formattedBudget = computed(() => {
             <div class="flex gap-8 sm:flex-row flex-col w-full z-10" v-else>
                 <div class="flex justify-center xs:justify-start">
                     <img v-lazy="{ 
-                        src: `https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.poster_path}`, 
-                        error: notFound, delay: 300 }" 
+                        src: `https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.poster_path}`, delay: 300 }" 
                         lazy="loading"
                         class="xs:h-[600px] h-[400px] max-w-md rounded-lg"
                         v-if="storeTVShowDetails.currentData.poster_path"
                     />
+                    <img class="xs:h-[600px] h-[400px] max-w-md rounded-lg" :src="notFound" alt="Not Found" v-else>
                 </div>
                 <div class="flex flex-col">
                     <div>
