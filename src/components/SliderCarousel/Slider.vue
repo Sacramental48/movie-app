@@ -31,24 +31,24 @@ const settings = ref ({
 });
 
 const imageBreakpoints = ref({
+    320: {
+        itemsToShow: 2,
+        snapAlign: 'start',
+    },
     400: {
         itemsToShow: 2,
-        itemsToScroll: 2,
         snapAlign: 'start',
     },
     575: {
         itemsToShow: 3,
-        itemsToScroll: 3,
         snapAlign: 'start',
     },
     785: {
         itemsToShow: 4,
-        itemsToScroll: 4,
         snapAlign: 'start',
     },
     990: {
         itemsToShow: 5,
-        itemsToScroll: 5,
         snapAlign: 'start',
     },
 });
@@ -56,17 +56,14 @@ const imageBreakpoints = ref({
 const videoBreakpoints = ref({
     400: {
         itemsToShow: 1,
-        itemsToScroll: 1,
         snapAlign: 'start',
     },
     785: {
         itemsToShow: 2,
-        itemsToScroll: 2,
         snapAlign: 'start',
     },
     990: {
         itemsToShow: 3,
-        itemsToScroll: 3,
         snapAlign: 'start',
     },
 });
@@ -77,7 +74,7 @@ const videoBreakpoints = ref({
         <h2 class="text-2xl dark:text-dim-white mb-4">{{props.title}}</h2>
         <Carousel v-bind="settings" :breakpoints="imageBreakpoints" v-if="props.getDataFromStores">
             <Slide v-for="item in props.getDataFromStores" :key="item.id">
-                <div class="pr-4 overflow-hidden">
+                <div class="w-full pr-4 overflow-hidden">
                     <CardForImages :item="item" :media="props.media" />
                 </div>
             </Slide>

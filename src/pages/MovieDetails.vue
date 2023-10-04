@@ -62,17 +62,17 @@ const formattedNumber = computed(() => {
             <div class="h-full w-full object-cover object-center dark:bg-dim-dark-gray" v-else></div>
             <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
         </div>
-        <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32">
-            <Spinner v-if="storeMovieDetails.currentData.length === 0"></Spinner>
-            <div class="flex gap-8 sm:flex-row flex-col z-10" v-else>
-                <div class="flex w-full xs:h-[600px] h-[400px] xs:justify-center justify-start">
+        <Spinner v-if="storeMovieDetails.currentData.length === 0"></Spinner>
+        <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32" v-else>
+            <div class="flex gap-8 sm:flex-row flex-col z-10">
+                <div class="flex justify-center xs:justify-start">
                     <img v-lazy="{ 
                         src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.poster_path}`, delay: 300 }" 
                         lazy="loading"
-                        class="h-full aspect-[1/1.5] max-w-md rounded-lg"
+                        class="sm:h-[600px] max-sm:w-full sm:max-w-md aspect-[1/1.5] max-w-full rounded-lg"
                         v-if="storeMovieDetails.currentData.poster_path"
                     />
-                    <img class="h-full aspect-[1/1.5] max-w-md rounded-lg" :src="notFound" alt="Not Found" v-else>
+                    <img class="w-full rounded-lg" :src="notFound" alt="Not Found" v-else>
                 </div>
                 <div class="flex flex-col">
                     <div>

@@ -16,7 +16,7 @@
     }
 
     img[lazy=loading] {
-        @apply max-w-xl min-h-[240px] dark:bg-dim-lazy-load contrast-125 overflow-hidden rounded-lg;
+        @apply max-w-xl min-h-[240px] max-h-min dark:bg-dim-lazy-load contrast-125 overflow-hidden rounded-lg;
     }
 
     body {

@@ -8,12 +8,13 @@ module.exports = {
     darkMode: 'class',
     theme: {
         screens: {
-            es: "280px",
-            xs: "525px",
-            sm: "768px",
-            md: "1024px",
-            lg: "1200px",
-            xl: "1440px",
+            xxs: "280px",
+            xs: "400px",
+            sm: "525px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1200px",
+            xxl: "1440px",
         },
 
         extend: {

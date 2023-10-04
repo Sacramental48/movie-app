@@ -11,7 +11,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import VuePlyr from 'vue-plyr'
 import VueLazyLoad from 'vue3-lazyload';
 
-import 'vue-plyr/dist/vue-plyr.css'
+// import './vue-plyr/dist/vue-plyr.css'
 import './assets/css/main.css'
 
 library.add(fas)
