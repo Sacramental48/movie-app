@@ -28,7 +28,7 @@ onMounted(async() => {
                 <SortSelect :data="storeTvShow"></SortSelect>
             </div>
             <div class="flex flex-col justify-center w-full items-center">
-                <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     <CardForImages v-for="item in storeTvShow.data" :key="item.id" :item="item" :media="route.name"/>
                 </div>
                 <PaginationPage :media="route.name" :data="storeTvShow"/>

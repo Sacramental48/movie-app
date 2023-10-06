@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, onUnmounted, defineAsyncComponent  } from 'vue'
+import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { useMovieVideo } from '@/store/getVideoLineForMovie'
 import { useMovieDetailsById } from '@/store/getMovieDetailsById'
 import { useMovieCredits } from '@/store/getMovieCredits'
@@ -7,17 +7,19 @@ import { useRoute } from 'vue-router'
 import { formatDate } from '@/use/formatDate'
 import { formatDuration } from '@/use/runtimeFormatted'
 import { formattedRating } from '@/use/formattedRating'
+import { useIsOpenValue } from '@/store/getBooleanValue'
 
+import Window from "@/components/UI/DialogWindow.vue";
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import DynamicRating from '@/components/UI/DynamicRatingColor.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 
 const route = useRoute();
-
 const storeMovieVideo = useMovieVideo();
 const storeMovieDetails = useMovieDetailsById();
 const storeMovieCredits = useMovieCredits();
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
+const storeIsOpenValue = useIsOpenValue();
 
 onMounted(async() => {
     storeMovieDetails.currentId = route.params.id;
@@ -29,8 +31,6 @@ onMounted(async() => {
 });
 
 onUnmounted(() => {
-    // storeMovieDetails.currentData = [];
-    // storeMovieDetails.currentId = '';
     storeMovieDetails.$reset();
     storeMovieCredits.$reset();
     storeMovieVideo.$reset();
@@ -64,12 +64,12 @@ const formattedNumber = computed(() => {
         </div>
         <Spinner v-if="storeMovieDetails.currentData.length === 0"></Spinner>
         <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32" v-else>
-            <div class="flex gap-8 sm:flex-row flex-col z-10">
+            <div class="flex gap-8 md:flex-row flex-col z-10">
                 <div class="flex justify-center xs:justify-start">
                     <img v-lazy="{ 
                         src: `https://image.tmdb.org/t/p/original${storeMovieDetails.currentData.poster_path}`, delay: 300 }" 
                         lazy="loading"
-                        class="sm:h-[600px] max-sm:w-full sm:max-w-md aspect-[1/1.5] max-w-full rounded-lg"
+                        class="md:h-[600px] max-md:w-full md:max-w-md aspect-[1/1.5] max-w-full rounded-lg"
                         v-if="storeMovieDetails.currentData.poster_path"
                     />
                     <img class="w-full rounded-lg" :src="notFound" alt="Not Found" v-else>
@@ -100,8 +100,15 @@ const formattedNumber = computed(() => {
                     </div>
                 </div>
             </div>
-            <Slider :getDataFromStores="storeMovieCredits.dataCast" v-if="storeMovieCredits.dataCast !== 0" title="Cast" />
-            <!-- <Slider :video="storeMovieVideo.currentData" v-if="storeMovieVideo.currentData.length !== 0" title="Video" /> -->
+            <Slider :getDataFromStores="storeMovieCredits.dataCast" v-if="storeMovieCredits.dataCast.length !== 0" title="Cast" />
+            <Slider :video="storeMovieVideo.currentData" v-if="storeMovieVideo.currentData.length !== 0" title="Video" />
+            <Window :show="storeIsOpenValue.isOpen">
+                <iframe 
+                    class="rounded-lg w-full h-full" 
+                    allowfullscreen
+                    :src="`https://www.youtube.com/embed/${storeIsOpenValue.videoKey}?autoplay=1&iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`">
+                </iframe>
+            </Window>
         </div>
     </div>
 </template>
