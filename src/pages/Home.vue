@@ -1,6 +1,6 @@
 <script setup>
 import { useAllTrending } from '@/store/getAllTrending'
-import { onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
 import { useTopRatedMovie } from '@/store/getTopRatedMovie'
 import { useTopRatedSerials } from '@/store/getTopRatedSerials'
 import { useSearchResult } from '@/store/getSearchResult';
@@ -29,6 +29,7 @@ onMounted( async() => {
 watch(searchContent, async val => {
     storeSearchResult.currentRequest = val;
     await storeSearchResult.getSearchResult();
+    console.log(storeSearchResult.dataSearchResult);
 
     if (val.length !== 0) {
         await nextTick();
@@ -48,7 +49,7 @@ const closeMenu = (event) => {
     }
 };
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
     window.removeEventListener('click', closeMenu);
 });
 </script>

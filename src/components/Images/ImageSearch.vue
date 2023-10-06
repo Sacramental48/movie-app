@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#ffffff" class="w-8 fill-none stroke-none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#ffffff" class="w-8 h-full fill-none stroke-none" xmlns="http://www.w3.org/2000/svg">
             <g>
                 <rect width="24" height="24" fill="dark:#434343"/>
                 <circle cx="10.5" cy="10.5" r="6.5" stroke="#fff" stroke-linejoin="round"/>
