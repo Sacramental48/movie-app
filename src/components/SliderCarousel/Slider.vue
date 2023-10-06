@@ -31,7 +31,7 @@ const settings = ref ({
 });
 
 const imageBreakpoints = ref({
-    320: {
+    340: {
         itemsToShow: 2,
         snapAlign: 'start',
     },

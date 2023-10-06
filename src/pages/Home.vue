@@ -57,16 +57,16 @@ onUnmounted(() => {
     <div class="flex flex-col container pt-32">
         <Spinner v-if="storeTrending.data.length === 0 && storeTopMovie.data.length === 0 && storeTopSerials.data.length === 0"/>
         <div class="flex flex-col" v-else>
-            <div class=" flex flex-col items-center mb-24">
+            <div class=" flex flex-col items-center justify-center mb-24">
                 <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
-                <div class="flex w-full max-w-screen-sm relative">
-                    <input type="text" class="outline-none w-full text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
+                <div class="flex w-full justify-center relative">
+                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
                     <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20"><ImageSearch></ImageSearch></button>
                     <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>
-            <div class="flex flex-col gap-14">
+            <div class="flex flex-col xs:gap-14 gap-8">
                 <Slider :getDataFromStores="storeTrending.data" title="Weekly Trends"></Slider>
                 <Slider :getDataFromStores="storeTopMovie.data" :media="'movie'" title="Top Rated of Movie"></Slider>
                 <Slider :getDataFromStores="storeTopSerials.data" :media="'tv'" title="Top Rated of Serials"></Slider>

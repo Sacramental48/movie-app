@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
 import { useTVShow } from '@/store/getTVShow'
-import { useMovieApp } from '../store/getMovieApp'
+import { useMovieApp } from '../../store/getMovieApp'
 
 const storeTvShow = useTVShow();
 const storeMovieApp = useMovieApp();
@@ -49,8 +49,8 @@ watch(selectSort, value => {
 
 <template>
     <div class="flex flex-col cursor-pointer relative select-none">
-        <div class="flex gap-10 border dark:border-dim-semi-dark-gray p-2.5 rounded-2xl text-dim-white" @click="isOpen = !isOpen">
-            <p>Select your option: </p>
+        <div class="flex gap-10 border px-4 dark:border-dim-semi-dark-gray p-2.5 rounded-2xl text-dim-white" @click="isOpen = !isOpen">
+            <p class="xs:block hidden">Select your option: </p>
             <span v-if="isOpen"> <font-awesome-icon :icon="['fas', 'chevron-up']" class="dark:text-dim-white text-dim-dark-gray" /></span>
             <span v-else><font-awesome-icon :icon="['fas', 'chevron-up']" rotation=180 class="dark:text-dim-white text-dim-dark-gray" /></span>
         </div>

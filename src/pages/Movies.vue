@@ -7,7 +7,7 @@ import Slider from '@/components/SliderCarousel/Slider.vue'
 import CardForImages from '@/components/CardForImages.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import PaginationPage from '@/components/UI/PaginationPage.vue'
-import SortSelect from '@/components/SortSelect.vue';
+import SortSelect from '@/components/UI/SortSelect.vue';
 
 const route = useRoute();
 const storeMovieApp = useMovieApp();
