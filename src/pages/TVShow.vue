@@ -1,6 +1,6 @@
 <script setup>
 import { useTVShow } from '@/store/getTVShow'
-import { ref, onMounted, watch} from 'vue'
+import { ref, onMounted, onUnmounted} from 'vue'
 import { useRoute } from 'vue-router'
 
 import CardForImages from '@/components/CardForImages.vue'
@@ -15,6 +15,10 @@ const totalPages = ref(0);
 
 onMounted(async() => {
     await storeTvShow.getTVShowData();
+});
+
+onUnmounted(() => {
+    storeTvShow.$reset();
 });
 </script>
 

@@ -1,6 +1,6 @@
 <script setup>
 import { useMovieApp } from '../store/getMovieApp'
-import { ref, onMounted, watch} from 'vue'
+import { ref, onMounted, onUnmounted} from 'vue'
 import {useRoute} from 'vue-router'
 
 import Slider from '@/components/SliderCarousel/Slider.vue'
@@ -10,7 +10,6 @@ import PaginationPage from '@/components/UI/PaginationPage.vue'
 import SortSelect from '@/components/SortSelect.vue';
 
 const route = useRoute();
-console.log(route.name);
 const storeMovieApp = useMovieApp();
 const currentPageCount = ref(null)
 
@@ -20,6 +19,9 @@ onMounted(async() => {
     currentPageCount.value = storeMovieApp.currentPageMovie;
 });
 
+onUnmounted(() => {
+    storeMovieApp.$reset();
+});
 </script>
 
 <template>
