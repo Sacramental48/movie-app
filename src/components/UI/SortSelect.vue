@@ -36,7 +36,6 @@ watch(selectSort, value => {
     }
     if (props.data.$id === 'TVShow') {
         storeTvShow.$reset();
-        // storeMovieApp.$reset();
         props.data.sortBy = value;
         storeTvShow.getTVShowData();
     }

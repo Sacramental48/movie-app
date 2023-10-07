@@ -17,11 +17,6 @@ const routes = [
         component: () => import('../pages/TVShowDetails.vue')
     },
     {
-        path: '/found_result/:query',
-        name: 'result',
-        component: () => import('../pages/FoundResult.vue')
-    },
-    {
         path: '/:contentType/:contentId',
         name: 'contentDetails',
         component: () => import('../pages/CardList.vue')

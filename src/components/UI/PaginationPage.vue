@@ -17,9 +17,6 @@ const props = defineProps({
 });
 
 const changePage = async (pageNum) => {
-    console.log('pagenum', pageNum);
-    console.log('media', props.media);
-    console.log('data', props.data);
     try {
         props.data.setCurrentPage(pageNum);
         await router.push({ path: `/${props.media}/${pageNum}` });
@@ -30,7 +27,7 @@ const changePage = async (pageNum) => {
     }
 };
 
-const currentPageCount = ref(parseInt(props.data.currentPageMovie || props.data.currentPageSerials));
+const currentPageCount = ref(parseInt(props.data.currentPageMovie || props.data.currentPageSerials || props.data.currentResultPage));
 
 </script>
 

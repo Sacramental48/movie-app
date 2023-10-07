@@ -1,6 +1,6 @@
 <script setup>
 import { useSearchResult } from '@/store/getSearchResult';
-import { ref, onMounted, watch, onBeforeUnmount, onUnmounted } from 'vue';
+import { ref, onMounted, watch, onBeforeUnmount, onUnmounted, nextTick } from 'vue';
 import { useMovieApp } from '@/store/getMovieApp';
 import { useTVShow } from '@/store/getTVShow';
 import { useRouter, useRoute } from 'vue-router';
@@ -18,6 +18,8 @@ const router = useRouter();
 const route = useRoute();
 const headerRef = ref(null);
 const activeTham = ref(null);
+const searchContent = ref('');
+const inputFocus = ref('');
 
 onMounted(() => {
     window.addEventListener('scroll', onScroll);
@@ -31,7 +33,11 @@ function searchMovieFunc() {
 
 function changeVisibleValue() {
     isVisibleInput.value = !isVisibleInput.value;
-    console.log(isVisibleInput.value);
+    
+    nextTick(() => {
+        inputFocus.value.focus();
+    });
+
 };
 
 function getCurrentValueFromHamburgerTham(value) {
@@ -46,13 +52,14 @@ const navigationLinks = ref([
 const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
-    // await router.push({ path: `${path}` });
+    sessionStorage.setItem('currentSearchResultPage', 1);
     await router.push({ name: 'contentDetails', params: { contentType: path, contentId: '1' }});
 };
 
 const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
+    sessionStorage.setItem('currentSearchResultPage', 1);
     await router.push({ path: '/' });
 };
 
@@ -96,12 +103,22 @@ const handleMouseWheel = (event) => {
 };
 
 const closeInput = (event) => {
-    if(isVisibleInput.value && event.target.tagName !== 'INPUT' && event.target.tagName !== 'svg') {
+    if(isVisibleInput.value && event.target.tagName !== 'INPUT' && event.target.tagName !== 'BUTTON') {
         isVisibleInput.value = false;
         movieItem.value = '';
     }
     event.stopPropagation();
 };
+
+const findSearchResults = async(contentId) => {
+    router.push({name: 'contentDetails', params: { contentType: 'search_result', contentId: '1' }});
+    await storeSearchResult.getSearchResult();
+    isVisibleInput.value = false;
+};
+
+watch(searchContent, async val => {
+    storeSearchResult.setCurrentRequest(val);
+});
 
 onBeforeUnmount(() => {
     window.removeEventListener('click', closeInput);
@@ -116,7 +133,7 @@ onBeforeUnmount(() => {
             <div class="flex w-full justify-between">
                 <div class="flex items-center gap-2 cursor-pointer" @click="switchToHome">
                     <ImageLogo></ImageLogo>
-                    <p class="text-xl dark:text-dim-white text-black">MovieApp</p>
+                    <span class="text-xl dark:text-dim-white text-black">MovieApp</span>
                 </div>
                 <div class="sm:flex hidden gap-4">
                     <div v-for="item in navigationLinks" :key="item" >
@@ -131,7 +148,7 @@ onBeforeUnmount(() => {
                     <ImageSearch class="cursor-pointer" @click="changeVisibleValue" :isVisibleInput="isVisibleInput"></ImageSearch>
                 </div>
                 <div class="flex border xs:flex absolute h-[50px] top-11 left-0 w-full z-10 animate-input-down" v-if="isVisibleInput">
-                    <input @click.stop type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-transparent dark:bg-dim-bright z-10">
+                    <input v-model="searchContent" ref="inputFocus" @click.stop @keyup.enter="findSearchResults(storeSearchResult.currentRequest)" type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-transparent dark:bg-dim-bright z-10">
                 </div>
                 <Hamburger :links="navigationLinks" @isActiv-handle="getCurrentValueFromHamburgerTham"/>
             </div>

@@ -23,7 +23,7 @@ const findSelectedCard = () => {
     <div class="flex flex-col cursor-pointer" @click="findSelectedCard">
         <div class="relative">
             <img v-lazy="{ 
-                src: `https://image.tmdb.org/t/p/original/${props.item.poster_path || props.item.profile_path}`, delay: 300 }" 
+                src: `https://image.tmdb.org/t/p/original${props.item.poster_path || props.item.profile_path}`, delay: 300 }" 
                 lazy="loading"
                 class="w-full aspect-[1/1.5] object-cover object-center overflow-hidden rounded-lg hover:opacity-75 duration-150"
                 v-if="props.item.poster_path || props.item.profile_path"

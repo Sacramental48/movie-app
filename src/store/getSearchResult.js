@@ -4,8 +4,8 @@ import axios from 'axios'
 export const useSearchResult = defineStore('searchResult', {
     state: () => ({
         dataSearchResult: [],
-        currentPage: 1,
-        currentRequest: '',
+        currentResultPage: sessionStorage.getItem('currentSearchResultPage') || 1,
+        totalPages: null,
     }),
 
     actions: {
@@ -14,10 +14,10 @@ export const useSearchResult = defineStore('searchResult', {
                 method: 'GET',
                 url: 'https://api.themoviedb.org/3/search/multi',
                 params: {
-                    query: this.currentRequest,
+                    query: sessionStorage.getItem('currentRequest') || '',
                     include_adult: 'false',
                     language: 'en-US',
-                    page: this.currentPage,
+                    page: this.currentResultPage,
                 },
                 headers: {
                     accept: 'application/json',
@@ -27,9 +27,16 @@ export const useSearchResult = defineStore('searchResult', {
             try {
                 const response = await axios.request(config);
                 this.dataSearchResult = response.data.results;
+                this.totalPages = response.data.total_pages;
             }catch(error) {
                 console.error(error);
             }
+        },
+        setCurrentPage(page) {
+            sessionStorage.setItem('currentSearchResultPage', page);
+        },
+        setCurrentRequest(value) {
+            sessionStorage.setItem('currentRequest', value);
         },
     }
 

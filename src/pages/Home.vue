@@ -29,7 +29,7 @@ onMounted( async() => {
 });
 
 watch(searchContent, async val => {
-    storeSearchResult.currentRequest = val;
+    storeSearchResult.setCurrentRequest(val);
     await storeSearchResult.getSearchResult();
 
     if (val.length !== 0) {
@@ -50,10 +50,8 @@ const closeMenu = (event) => {
     }
 };
 
-
-
-const findSearchResults = (query) => {
-    router.push({name: 'result', params: { query }});
+const findSearchResults = (contentId) => {
+    router.push({name: 'contentDetails', params: { contentType: 'search_result', contentId: '1' }});
 };
 
 onBeforeUnmount(() => {
@@ -69,8 +67,10 @@ onBeforeUnmount(() => {
                 <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="flex w-full justify-center relative">
-                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu"/>
-                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)"><ImageSearch></ImageSearch></button>
+                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu" @keyup.enter="findSearchResults(storeSearchResult.currentRequest)"/>
+                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)">
+                        <ImageSearch></ImageSearch>
+                    </button>
                     <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>
