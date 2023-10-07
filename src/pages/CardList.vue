@@ -46,10 +46,7 @@ onMounted(async() => {
     if(route.params.contentType === 'search_result') {
         storeSearchResult.getSearchResult();
         currentPageCount.value = storeSearchResult.currentResultPage;
-        console.log(storeSearchResult.data);
     }
-    console.log('movie', storeMovieApp.data.length !== 0 );
-    console.log('tv', storeTvShow.data.length !== 0 );
 });
 
 const pageName = computed(() => {
@@ -71,6 +68,7 @@ const displayData = computed(() => {
 
     return data;
 });
+console.log(displayData.value);
 
 onUnmounted(() => {
     storeMovieApp.$reset();
@@ -91,7 +89,7 @@ onUnmounted(() => {
             </div>
             <div class="flex flex-col justify-center w-full items-center">
                  <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="displayData.length !== 0">
-                    <CardForImages v-for="item in displayData" :key="item.id" :item="item" :media="route.params.contentType"/>
+                    <CardForImages v-for="item in displayData" :key="item.id" :item="item" :media="item.media_type"/>
                 </div>
                 <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" v-show="media.data.length">
                     <PaginationPage
