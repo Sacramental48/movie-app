@@ -20,16 +20,12 @@ const getValueFromSortSection = function(value) {
 };
 
 const allOptionName = ref([
-    {id: 1, value: 'popularity.desc', name: 'Popularity Desc',},
-    {id: 2, value: 'popularity.asc', name: 'Popularity Asc',},
-    {id: 3, value: 'revenue.desc', name: 'Revenue Desc',},
-    {id: 4, value: 'revenue.asc', name: 'Revenue Asc',},
+    {id: 1, value: 'popularity.desc', name: 'Popularity Descending',},
+    {id: 2, value: 'popularity.asc', name: 'Popularity Ascending',},
+    {id: 3, value: 'vote_count.desc', name: 'Rating Descending',},
+    {id: 4, value: 'vote_count.asc', name: 'Rating Ascending',},
     {id: 5, value: 'primary_release_date.desc', name: 'Release Date Desc',},
     {id: 6, value: 'primary_release_date.asc', name: 'Release Date Asc',},
-    {id: 7, value: 'vote_average.desc', name: 'Vote average Desc',},
-    {id: 8, value: 'vote_average.asc', name: 'Vote average Asc',},
-    {id: 9, value: 'vote_count.desc', name: 'Vote count Desc',},
-    {id: 10, value: 'vote_count.asc', name: 'Vote count Asc',},
 ]);
 
 watch(selectSort, value => {

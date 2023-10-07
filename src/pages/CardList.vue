@@ -56,10 +56,10 @@ onUnmounted(() => {
             </div>
             <div class="flex flex-col justify-center w-full items-center">
                 <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="storeMovieApp.data.length !== 0">
-                    <CardForImages v-for="item in storeMovieApp.data" :key="item.id" :item="item" :media="route.name"/>
+                    <CardForImages v-for="item in storeMovieApp.data" :key="item.id" :item="item" :media="route.params.contentType"/>
                 </div>
                 <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="storeTvShow.data.length !== 0">
-                    <CardForImages v-for="item in storeTvShow.data" :key="item.id" :item="item" :media="route.name"/>
+                    <CardForImages v-for="item in storeTvShow.data" :key="item.id" :item="item" :media="route.params.contentType"/>
                 </div>
                 <PaginationPage :currentPageCount="currentPageCount" :media="route.params.contentType" :data="storeMovieApp" v-if="storeMovieApp.data.length !== 0"/>
                 <PaginationPage :currentPageCount="currentPageCount" :media="route.params.contentType" :data="storeTvShow" v-if="storeTvShow.data.length !== 0"/>
