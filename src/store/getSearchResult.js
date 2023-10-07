@@ -3,9 +3,9 @@ import axios from 'axios'
 
 export const useSearchResult = defineStore('searchResult', {
     state: () => ({
-        dataSearchResult: [],
+        data: [],
         currentResultPage: sessionStorage.getItem('currentSearchResultPage') || 1,
-        totalPages: null,
+        totalPages: 0,
     }),
 
     actions: {
@@ -26,7 +26,7 @@ export const useSearchResult = defineStore('searchResult', {
             };
             try {
                 const response = await axios.request(config);
-                this.dataSearchResult = response.data.results;
+                this.data = response.data.results;
                 this.totalPages = response.data.total_pages;
             }catch(error) {
                 console.error(error);

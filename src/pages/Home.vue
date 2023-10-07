@@ -43,7 +43,7 @@ watch(searchContent, async val => {
 const closeMenu = (event) => {
     if(isVisibleInput.value && event.target.tagName !== 'INPUT') {
         isVisibleInput.value = false;
-    } else if(!isVisibleInput.value && event.target.tagName === 'INPUT' && storeSearchResult.dataSearchResult.length !== 0) {
+    } else if(!isVisibleInput.value && event.target.tagName === 'INPUT' && storeSearchResult.data.length !== 0) {
         isVisibleInput.value = true;
     } else {
         return;
@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
                     <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)">
                         <ImageSearch></ImageSearch>
                     </button>
-                    <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
+                    <SearchResult :data="storeSearchResult.data" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>
             <div class="flex flex-col xs:gap-14 gap-8">
