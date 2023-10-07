@@ -32,18 +32,18 @@ const allOptionName = ref([
     {id: 10, value: 'vote_count.asc', name: 'Vote count Asc',},
 ]);
 
-console.log(props.data);
 watch(selectSort, value => {
     if(props.data.$id === 'movie') {
-        props.data.sortBy = value
+        storeMovieApp.$reset();
+        props.data.sortBy = value;
         storeMovieApp.getMovieData();
-    } else if (props.data.$id === 'TVShow') {
-        props.data.sortBy = value
-        storeTvShow.getTVShowData();
-    } else {
-        return true
     }
-    
+    if (props.data.$id === 'TVShow') {
+        storeTvShow.$reset();
+        // storeMovieApp.$reset();
+        props.data.sortBy = value;
+        storeTvShow.getTVShowData();
+    }
 });
 </script>
 

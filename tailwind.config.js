@@ -21,6 +21,7 @@ module.exports = {
             animation: {
                 'header-up': 'header-up-ani 1s forwards',
                 'header-down': 'header-down-ani 1s forwards',
+                'input-down': 'input-down-ani 0.4s forwards',
             },
             keyframes: {
                 'header-up-ani': {
@@ -28,6 +29,10 @@ module.exports = {
                     '100%': { transform: 'translateY(-150%)' }
                 },
                 'header-down-ani': {
+                    '0%': { transform: 'translateY(-150%)' },
+                    '100%': { transform: 'translateY(0)' }
+                },
+                'input-down-ani': {
                     '0%': { transform: 'translateY(-150%)' },
                     '100%': { transform: 'translateY(0)' }
                 },

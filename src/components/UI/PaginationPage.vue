@@ -1,11 +1,11 @@
 <script setup>
-import {ref, watch} from 'vue'
-import { useMovieApp } from '../../store/getMovieApp'
+import {ref, watch} from 'vue';
+import { useMovieApp } from '../../store/getMovieApp';
 import Paginate from "vuejs-paginate-next";
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router';
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
 const props = defineProps({
     media: {
@@ -14,9 +14,12 @@ const props = defineProps({
     data: {
         type: Object
     }
-})
+});
 
 const changePage = async (pageNum) => {
+    console.log('pagenum', pageNum);
+    console.log('media', props.media);
+    console.log('data', props.data);
     try {
         props.data.setCurrentPage(pageNum);
         await router.push({ path: `/${props.media}/${pageNum}` });
@@ -25,8 +28,9 @@ const changePage = async (pageNum) => {
     } finally {
         location.reload();
     }
-}
-const currentPageCount = ref(parseInt(props.data.currentPageMovie || props.data.currentPageSerials))
+};
+
+const currentPageCount = ref(parseInt(props.data.currentPageMovie || props.data.currentPageSerials));
 
 </script>
 

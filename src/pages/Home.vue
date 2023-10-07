@@ -4,12 +4,14 @@ import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
 import { useTopRatedMovie } from '@/store/getTopRatedMovie'
 import { useTopRatedSerials } from '@/store/getTopRatedSerials'
 import { useSearchResult } from '@/store/getSearchResult';
+import { useRouter } from 'vue-router';
 
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import SearchResult from '@/components/UI/SearchResult.vue';
 import ImageSearch from '@/components/Images/ImageSearch.vue'
 
+const router = useRouter();
 const isVisibleInput = ref(false);
 const storeTrending = useAllTrending();
 const storeTopMovie = useTopRatedMovie();
@@ -29,7 +31,6 @@ onMounted( async() => {
 watch(searchContent, async val => {
     storeSearchResult.currentRequest = val;
     await storeSearchResult.getSearchResult();
-    console.log(storeSearchResult.dataSearchResult);
 
     if (val.length !== 0) {
         await nextTick();
@@ -40,13 +41,19 @@ watch(searchContent, async val => {
 });
 
 const closeMenu = (event) => {
-    if(isVisibleInput.value && event.srcElement.tagName !== 'INPUT') {
+    if(isVisibleInput.value && event.target.tagName !== 'INPUT') {
         isVisibleInput.value = false;
-    } else if(!isVisibleInput.value && event.srcElement.tagName === 'INPUT' && storeSearchResult.dataSearchResult.length !== 0) {
+    } else if(!isVisibleInput.value && event.target.tagName === 'INPUT' && storeSearchResult.dataSearchResult.length !== 0) {
         isVisibleInput.value = true;
     } else {
         return;
     }
+};
+
+
+
+const findSearchResults = (query) => {
+    router.push({name: 'result', params: { query }});
 };
 
 onBeforeUnmount(() => {
@@ -62,8 +69,8 @@ onBeforeUnmount(() => {
                 <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
                 <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="flex w-full justify-center relative">
-                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput"/>
-                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20"><ImageSearch></ImageSearch></button>
+                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu"/>
+                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)"><ImageSearch></ImageSearch></button>
                     <SearchResult :data="storeSearchResult.dataSearchResult" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
             </div>

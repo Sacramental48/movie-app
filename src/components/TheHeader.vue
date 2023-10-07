@@ -3,12 +3,11 @@ import { useSearchResult } from '@/store/getSearchResult';
 import { ref, onMounted, watch, onBeforeUnmount, onUnmounted } from 'vue';
 import { useMovieApp } from '@/store/getMovieApp';
 import { useTVShow } from '@/store/getTVShow';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 import ImageSearch from '@/components/Images/ImageSearch.vue';
 import ImageLogo from '@/components/Images/ImageLogo.vue';
 import Hamburger from './UI/HamburderMenu.vue';
-import TheSearch from './UI/TheSearch.vue';
 
 const storeMovieApp = useMovieApp();
 const storeTvShow = useTVShow();
@@ -16,13 +15,14 @@ const storeSearchResult = useSearchResult();
 const movieItem = ref('');
 const isVisibleInput = ref(false);
 const router = useRouter();
+const route = useRoute();
 const headerRef = ref(null);
 const activeTham = ref(null);
 
 onMounted(() => {
     window.addEventListener('scroll', onScroll);
     window.addEventListener('wheel', handleMouseWheel);
-    window.addEventListener('click', closeMenu);
+    window.addEventListener('click', closeInput);
 });
 
 function searchMovieFunc() {
@@ -39,14 +39,15 @@ function getCurrentValueFromHamburgerTham(value) {
 };
 
 const navigationLinks = ref([
-    {name: 'Movie', path: `/movie/${storeMovieApp.currentPageMovie}`}, 
-    {name: 'TV-Show', path: `/tv/${storeTvShow.currentPageSerials}`},
+    {name: 'Movie', path: 'movie'}, 
+    {name: 'TV-Show', path: 'tv'},
 ]);
 
 const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
-    await router.push({ path: `${path}` });
+    // await router.push({ path: `${path}` });
+    await router.push({ name: 'contentDetails', params: { contentType: path, contentId: '1' }});
 };
 
 const switchToHome = async () => {
@@ -65,17 +66,17 @@ function hasValue(obj, value) {
 };
 
 const onScroll = () => {
-        const pageYOffset = window.pageYOffset;
-        const headerClassList = headerRef.value.classList;
+    const pageYOffset = window.pageYOffset;
+    const headerClassList = headerRef.value.classList;
 
-        if (pageYOffset > 200 && hasValue(headerClassList, 'animate-header-down') === false && !activeTham.value && !isVisibleInput.value) {
-            headerClassList.add('animate-header-up');
-        } else if(pageYOffset < 200 && hasValue(headerClassList, 'animate-header-up')) {
-            headerClassList.remove('animate-header-up');
-            headerClassList.add('animate-header-down');
-        } else {
-            return;
-        }
+    if (pageYOffset > 200 && hasValue(headerClassList, 'animate-header-down') === false && !activeTham.value && !isVisibleInput.value) {
+        headerClassList.add('animate-header-up');
+    } else if(pageYOffset < 200 && hasValue(headerClassList, 'animate-header-up')) {
+        headerClassList.remove('animate-header-up');
+        headerClassList.add('animate-header-down');
+    } else {
+        return;
+    }
 };
 
 const handleMouseWheel = (event) => {
@@ -94,15 +95,16 @@ const handleMouseWheel = (event) => {
     }
 };
 
-const closeMenu = (event) => {
+const closeInput = (event) => {
     if(isVisibleInput.value && event.target.tagName !== 'INPUT' && event.target.tagName !== 'svg') {
         isVisibleInput.value = false;
         movieItem.value = '';
     }
+    event.stopPropagation();
 };
 
 onBeforeUnmount(() => {
-    window.removeEventListener('click', closeMenu);
+    window.removeEventListener('click', closeInput);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('wheel', handleMouseWheel);
 });
@@ -128,7 +130,9 @@ onBeforeUnmount(() => {
                 <div class="flex relative justify-end h-full max-sm:mr-4">
                     <ImageSearch class="cursor-pointer" @click="changeVisibleValue" :isVisibleInput="isVisibleInput"></ImageSearch>
                 </div>
-                <TheSearch v-if="isVisibleInput" v-model="movieItem"></TheSearch>
+                <div class="flex border xs:flex absolute h-[50px] top-11 left-0 w-full z-10 animate-input-down" v-if="isVisibleInput">
+                    <input @click.stop type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-transparent dark:bg-dim-bright z-10">
+                </div>
                 <Hamburger :links="navigationLinks" @isActiv-handle="getCurrentValueFromHamburgerTham"/>
             </div>
         </div>
