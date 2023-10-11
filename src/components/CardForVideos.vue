@@ -25,7 +25,7 @@ const props = defineProps({
         <p class="dark:text-dim-white text-start text-lg line-clamp-1">{{video.name}}</p>
         <div class="relative cursor-pointer flex items-center justify-center" @click="toggleDialog(video.key)">
             <img class="rounded-lg w-full" :src="`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`">
-            <ImagePlay />
+            <ImagePlay position="absolute" />
         </div>
     </div>
 </template>

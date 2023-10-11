@@ -9,6 +9,7 @@ import { formatDuration } from '@/use/runtimeFormatted'
 import { formattedRating } from '@/use/formattedRating'
 import { useIsOpenValue } from '@/store/getBooleanValue'
 
+import ImagePlay from "@/components/Images/ImagePlay.vue";
 import Window from "@/components/UI/DialogWindow.vue";
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import DynamicRating from '@/components/UI/DynamicRatingColor.vue'
@@ -48,6 +49,15 @@ const formattedNumber = computed(() => {
     }
     return formatNumberWithSpaces(number);
 });
+
+const openTrailer = () => {
+    storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
+    for(let item of storeMovieVideo.currentData) {
+        if(item.type === 'Trailer') {
+            storeIsOpenValue.videoKey = item.key;
+        }
+    }
+};
 </script>
 
 <template>
@@ -84,7 +94,10 @@ const formattedNumber = computed(() => {
                     </div>
                     <div class="flex items-center my-4 gap-4">
                         <DynamicRating :rating="formattedRating(storeMovieDetails.currentData.vote_average)"></DynamicRating>
-                        <span>watch trailer</span>
+                        <div class="flex gap-2 justify-center items-center dark:text-dim-white text-xl hover: duration-300 cursor-pointer group" @click="openTrailer">
+                            <ImagePlay />
+                            <p class="group-hover:text-dim-hover-fuchsia duration-300">Trailer</p>
+                        </div>
                     </div>
                     <div class="mb-10">
                         <h2 class="text-lg font-semibold text-dim-white">Overview</h2>

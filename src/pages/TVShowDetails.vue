@@ -9,6 +9,7 @@ import { formatDuration } from '@/use/runtimeFormatted';
 import { formattedRating } from '@/use/formattedRating';
 import { useIsOpenValue } from '@/store/getBooleanValue';
 
+import ImagePlay from "@/components/Images/ImagePlay.vue";
 import Window from "@/components/UI/DialogWindow.vue";
 import Slider from '@/components/SliderCarousel/Slider.vue';
 import DynamicRating from '../components/UI/DynamicRatingColor.vue';
@@ -29,7 +30,6 @@ onMounted(async() => {
     await storeTVShowDetails.getDetailsTvById();
     await storeTvCredits.getTvCredits();
     await storeTvVideo.getTvVideo();
-    console.log(storeTVShowDetails.currentData);
 });
 
 onUnmounted(() => {
@@ -51,6 +51,15 @@ const formattedBudget = computed(() => {
     return formatNumberWithSpaces(number);
 });
 
+const openTrailer = () => {
+    storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
+    for(let item of storeTvVideo.currentData) {
+        if(item.type === 'Trailer') {
+            storeIsOpenValue.videoKey = item.key;
+        }
+    }
+    console.log(storeIsOpenValue.videoKey);
+};
 </script>
 
 <template>
@@ -86,7 +95,10 @@ const formattedBudget = computed(() => {
                     </div>
                     <div class="flex items-center my-8 gap-4">
                         <DynamicRating :rating="formattedRating(storeTVShowDetails.currentData.vote_average)"></DynamicRating>
-                        <span>watch trailer</span>
+                        <div class="flex gap-2 justify-center items-center dark:text-dim-white text-xl hover: duration-300 cursor-pointer group" @click="openTrailer">
+                            <ImagePlay />
+                            <p class="group-hover:text-dim-hover-fuchsia duration-300">Trailer</p>
+                        </div>
                     </div>
                     <div class="mb-10">
                         <h2 class="text-lg font-semibold text-dim-white">Overview</h2>
