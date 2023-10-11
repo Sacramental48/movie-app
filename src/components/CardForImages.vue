@@ -11,8 +11,6 @@ const props = defineProps({
         type: String
     }
 });
-console.log(props.item);
-console.log(props.media);
 
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
 

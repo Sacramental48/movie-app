@@ -7,6 +7,12 @@ const storeIsOpenValue = useIsOpenValue();
         show: {
             type: Boolean,
             default: false,
+        },
+        maxHeight: {
+            type: String
+        },
+        maxWidth: {
+            type: String
         }
     })
 
@@ -17,7 +23,7 @@ const storeIsOpenValue = useIsOpenValue();
 
 <template>
     <div v-if="show" @click="hideDialog" class="flex fixed z-10 inset-0 bg-black/[0.2]">
-        <div class="m-auto h-full sm:max-h-[700px] max-h-[320px] w-full max-w-[1200px] flex items-center justify-center px-4" @click.stop>
+        <div class="m-auto h-full w-full flex items-center justify-center" :style="{maxHeight, maxWidth}" @click.stop>
             <slot />
         </div>
     </div>

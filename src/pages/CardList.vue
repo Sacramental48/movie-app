@@ -47,6 +47,8 @@ onMounted(async() => {
         storeSearchResult.getSearchResult();
         currentPageCount.value = storeSearchResult.currentResultPage;
     }
+
+    console.log(storeMovieApp.data);
 });
 
 const pageName = computed(() => {
@@ -61,18 +63,19 @@ const displayData = computed(() => {
     let media = ''
     if (route.params.contentType === 'movie') {
         data = storeMovieApp.data;
-        media = 'movie'
+        media = 'movie';
     } else if (route.params.contentType === 'tv') {
         data = storeTvShow.data;
-        console.log('tv');
+        media = 'tv';
     } else if (route.params.contentType === 'search_result') {
         data = storeSearchResult.data;
-        media = 'search_result'
+        for(let item of storeSearchResult.data) {
+            media = item.media_type;
+        }
     }
 
     return {data, media};
 });
-console.log(displayData.value);
 
 onUnmounted(() => {
     storeMovieApp.$reset();

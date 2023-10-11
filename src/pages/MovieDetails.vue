@@ -102,7 +102,7 @@ const formattedNumber = computed(() => {
             </div>
             <Slider :getDataFromStores="storeMovieCredits.dataCast" v-if="storeMovieCredits.dataCast.length !== 0" title="Cast" />
             <Slider :video="storeMovieVideo.currentData" v-if="storeMovieVideo.currentData.length !== 0" title="Video" />
-            <Window :show="storeIsOpenValue.isOpen">
+            <Window :show="storeIsOpenValue.isOpen" maxHeight="70%" maxWidth="80%">
                 <iframe 
                     class="rounded-lg w-full h-full" 
                     allowfullscreen

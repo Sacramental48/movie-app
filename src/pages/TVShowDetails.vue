@@ -50,6 +50,7 @@ const formattedBudget = computed(() => {
     }
     return formatNumberWithSpaces(number);
 });
+
 </script>
 
 <template>
@@ -114,8 +115,8 @@ const formattedBudget = computed(() => {
                 </div>
             </div>
             <Slider :getDataFromStores="storeTvCredits.dataCast" title="Cast" v-if="storeTvCredits.dataCast.length !== 0" />
-            <Slider :video="storeTvVideo.currentData" title="Cast" v-if="storeTvCredits.dataCast.length !== 0" />
-            <Window :show="storeIsOpenValue.isOpen">
+            <Slider :video="storeTvVideo.currentData" title="Video" v-if="storeTvVideo.currentData.length" />
+            <Window :show="storeIsOpenValue.isOpen" maxHeight="70%" maxWidth="80%">
                 <iframe 
                     class="rounded-lg w-full h-full" 
                     allowfullscreen
