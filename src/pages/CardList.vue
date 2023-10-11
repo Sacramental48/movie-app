@@ -58,15 +58,19 @@ const pageName = computed(() => {
 
 const displayData = computed(() => {
     let data = [];
+    let media = ''
     if (route.params.contentType === 'movie') {
         data = storeMovieApp.data;
+        media = 'movie'
     } else if (route.params.contentType === 'tv') {
         data = storeTvShow.data;
+        console.log('tv');
     } else if (route.params.contentType === 'search_result') {
         data = storeSearchResult.data;
+        media = 'search_result'
     }
 
-    return data;
+    return {data, media};
 });
 console.log(displayData.value);
 
@@ -89,7 +93,7 @@ onUnmounted(() => {
             </div>
             <div class="flex flex-col justify-center w-full items-center">
                  <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="displayData.length !== 0">
-                    <CardForImages v-for="item in displayData" :key="item.id" :item="item" :media="item.media_type"/>
+                    <CardForImages v-for="item in displayData.data" :key="item.id" :item="item" :media="displayData.media"/>
                 </div>
                 <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" v-show="media.data.length">
                     <PaginationPage
