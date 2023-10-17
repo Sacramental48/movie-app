@@ -1,24 +1,24 @@
 <script setup>
-import { useIsOpenValue } from '@/store/getBooleanValue'
+import { useIsOpenValue } from '@/store/getBooleanValue';
 
 const storeIsOpenValue = useIsOpenValue();
 
-    const props = defineProps({
-        show: {
-            type: Boolean,
-            default: false,
-        },
-        maxHeight: {
-            type: String
-        },
-        maxWidth: {
-            type: String
-        }
-    })
+const props = defineProps({
+    show: {
+        type: Boolean,
+        default: false,
+    },
+    maxHeight: {
+        type: String
+    },
+    maxWidth: {
+        type: String
+    },
+});
 
-    function hideDialog() {
-        storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
-    }
+function hideDialog() {
+    storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
+};
 </script>
 
 <template>

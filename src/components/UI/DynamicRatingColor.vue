@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed } from 'vue';
 import "vue3-circle-progress/dist/circle-progress.css";
 import CircleProgress from "vue3-circle-progress";
 
@@ -16,20 +16,16 @@ const changeRating = computed(() => {
 
 const changeColor = computed(() => {
     if(props.rating >= 7 && props.rating <= 10) {
-        console.log('green');
         return '#00AB00';
-    }
+    };
 
     if(props.rating >= 5 && props.rating <= 6.9) {
-        console.log('yellow');
         return '#ffff00';
-    }
+    };
 
     if(props.rating >= 0 && props.rating <= 4.9) {
-        console.log('red');
         return '#EE0303';
-    }
-
+    };
 });
 </script>
 

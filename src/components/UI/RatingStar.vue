@@ -1,13 +1,13 @@
 <script setup>
-import { computed } from 'vue'
-import { formattedRating } from '@/use/formattedRating'
+import { computed } from 'vue';
+import { formattedRating } from '@/use/formattedRating';
 
 const props = defineProps({
     rating: {
         type: Number || String,
         required: true,
     }
-})
+});
 
 </script>
 

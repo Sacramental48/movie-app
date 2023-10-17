@@ -1,9 +1,9 @@
 <script setup>
 import { watch, ref } from 'vue';
-import { useRoute } from 'vue-router'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-const showNotFoundMessage = ref(false)
+const showNotFoundMessage = ref(false);
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({
@@ -19,7 +19,7 @@ const props = defineProps({
 
 const openSelected = (id, media) => {
     router.push({path: `/${media}/card/${id}`})
-}
+};
 
 const findMatches = (item) => {
     return item.original_title !== item.title || item.original_name !== item.name

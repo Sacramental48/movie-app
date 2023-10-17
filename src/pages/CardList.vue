@@ -47,8 +47,6 @@ onMounted(async() => {
         storeSearchResult.getSearchResult();
         currentPageCount.value = storeSearchResult.currentResultPage;
     }
-
-    console.log(storeMovieApp.data);
 });
 
 const pageName = computed(() => {

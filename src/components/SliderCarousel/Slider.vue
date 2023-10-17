@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import CardForImages from '../CardForImages.vue'
-import CardForVideos from '../CardForVideos.vue'
+import { ref, onMounted, computed } from 'vue';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
+import CardForImages from '../CardForImages.vue';
+import CardForVideos from '../CardForVideos.vue';
 
-import 'vue3-carousel/dist/carousel.css'
+import 'vue3-carousel/dist/carousel.css';
 
 const props = defineProps({
     getDataFromStores: {
@@ -22,7 +22,7 @@ const props = defineProps({
     title: {
         type: String,
         required: true,
-    }
+    },
 });
 
 const settings = ref ({

@@ -58,7 +58,6 @@ const openTrailer = () => {
             storeIsOpenValue.videoKey = item.key;
         }
     }
-    console.log(storeIsOpenValue.videoKey);
 };
 </script>
 

@@ -1,15 +1,15 @@
 <script setup>
-import { useAllTrending } from '@/store/getAllTrending'
-import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
-import { useTopRatedMovie } from '@/store/getTopRatedMovie'
-import { useTopRatedSerials } from '@/store/getTopRatedSerials'
+import { useAllTrending } from '@/store/getAllTrending';
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue';
+import { useTopRatedMovie } from '@/store/getTopRatedMovie';
+import { useTopRatedSerials } from '@/store/getTopRatedSerials';
 import { useSearchResult } from '@/store/getSearchResult';
 import { useRouter } from 'vue-router';
 
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import SearchResult from '@/components/UI/SearchResult.vue';
-import ImageSearch from '@/components/Images/ImageSearch.vue'
+import ImageSearch from '@/components/Images/ImageSearch.vue';
 
 const router = useRouter();
 const isVisibleInput = ref(false);

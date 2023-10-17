@@ -1,19 +1,19 @@
 <script setup>
-import { ref, onMounted, computed, onUnmounted } from 'vue'
-import { useMovieVideo } from '@/store/getVideoLineForMovie'
-import { useMovieDetailsById } from '@/store/getMovieDetailsById'
-import { useMovieCredits } from '@/store/getMovieCredits'
-import { useRoute } from 'vue-router'
-import { formatDate } from '@/use/formatDate'
-import { formatDuration } from '@/use/runtimeFormatted'
-import { formattedRating } from '@/use/formattedRating'
-import { useIsOpenValue } from '@/store/getBooleanValue'
+import { ref, onMounted, computed, onUnmounted } from 'vue';
+import { useMovieVideo } from '@/store/getVideoLineForMovie';
+import { useMovieDetailsById } from '@/store/getMovieDetailsById';
+import { useMovieCredits } from '@/store/getMovieCredits';
+import { useRoute } from 'vue-router';
+import { formatDate } from '@/use/formatDate';
+import { formatDuration } from '@/use/runtimeFormatted';
+import { formattedRating } from '@/use/formattedRating';
+import { useIsOpenValue } from '@/store/getBooleanValue';
 
 import ImagePlay from "@/components/Images/ImagePlay.vue";
 import Window from "@/components/UI/DialogWindow.vue";
-import Slider from '@/components/SliderCarousel/Slider.vue'
-import DynamicRating from '@/components/UI/DynamicRatingColor.vue'
-import Spinner from '@/components/UI/Spinner.vue'
+import Slider from '@/components/SliderCarousel/Slider.vue';
+import DynamicRating from '@/components/UI/DynamicRatingColor.vue';
+import Spinner from '@/components/UI/Spinner.vue';
 
 const route = useRoute();
 const storeMovieVideo = useMovieVideo();

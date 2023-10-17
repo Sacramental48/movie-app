@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import Rating from '@/components/UI/RatingStar.vue'
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import Rating from '@/components/UI/RatingStar.vue';
 const router = useRouter();
 const props = defineProps({
     item: {

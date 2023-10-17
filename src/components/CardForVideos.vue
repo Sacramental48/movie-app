@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import { useIsOpenValue } from '@/store/getBooleanValue'
+import { useIsOpenValue } from '@/store/getBooleanValue';
 import ImagePlay from "@/components/Images/ImagePlay.vue";
 import Window from "@/components/UI/DialogWindow.vue";
 

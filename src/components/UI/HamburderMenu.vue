@@ -1,19 +1,19 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 const isActive = ref(false);
 
-const emit = defineEmits(['isActiv-handle'])
+const emit = defineEmits(['isActiv-handle']);
 
 const props = defineProps({
     links: {
         type: Object,
         required: true,
     }
-})
+});
 
 const toggleTham = () => {
     isActive.value = !isActive.value;
@@ -23,8 +23,7 @@ const toggleTham = () => {
 const routerPush = (item) => {
     router.push({path: `${item}`});
     isActive.value = !isActive.value;
-}
-
+};
 </script>
 
 <template>
