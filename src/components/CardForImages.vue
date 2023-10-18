@@ -34,7 +34,7 @@ const findSelectedCard = () => {
             </div>
         </div>
         <p 
-        class="text-start text-xl line-clamp-1 text-dim-white" 
+        class="text-start text-xl line-clamp-1 dark:text-dim-white" 
         :title="props.item.original_title || props.item.original_name">
             {{props.item.original_title || props.item.original_name}}
         </p>

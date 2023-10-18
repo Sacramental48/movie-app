@@ -145,7 +145,7 @@ onBeforeUnmount(() => {
             </div>
             <div class="flex h-full items-center">
                 <div class="flex relative justify-end h-full max-sm:mr-4">
-                    <ImageSearch class="cursor-pointer" @click="changeVisibleValue" :isVisibleInput="isVisibleInput"></ImageSearch>
+                    <ImageSearch class="cursor-pointer" @click="changeVisibleValue" :isVisibleInput="isVisibleInput" stroke="dark:stroke-dim-white stroke-black"></ImageSearch>
                 </div>
                 <div class="flex border xs:flex absolute h-[50px] top-11 left-0 w-full z-10 animate-input-down" v-if="isVisibleInput">
                     <input v-model="searchContent" ref="inputFocus" @click.stop @keyup.enter="findSearchResults(storeSearchResult.currentRequest)" type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-transparent dark:bg-dim-bright z-10">

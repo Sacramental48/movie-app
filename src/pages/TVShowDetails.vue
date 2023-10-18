@@ -75,7 +75,7 @@ const openTrailer = () => {
         </div>
         <Spinner v-if="storeTVShowDetails.currentData.length === 0"></Spinner>
         <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32" v-else>
-            <div class="flex gap-8 md:flex-row flex-col z-10">
+            <div class="flex gap-8 md:flex-row flex-col z-10 w-full">
                 <div class="flex justify-center xs:justify-start">
                     <img v-lazy="{ 
                         src: `https://image.tmdb.org/t/p/original${storeTVShowDetails.currentData.poster_path}`, delay: 300 }" 

@@ -64,12 +64,12 @@ onBeforeUnmount(() => {
         <Spinner v-if="storeTrending.data.length === 0 && storeTopMovie.data.length === 0 && storeTopSerials.data.length === 0"/>
         <div class="flex flex-col" v-else>
             <div class=" flex flex-col items-center justify-center mb-24">
-                <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
-                <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
+                <h1 class="xs:text-7xl text-4xl dark:text-dim-white mb-2">Welcome</h1>
+                <p class="xs:text-xl text-base mb-10 dark:text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="flex w-full justify-center relative">
-                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu" @keyup.enter="findSearchResults(storeSearchResult.currentRequest)"/>
-                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)">
-                        <ImageSearch></ImageSearch>
+                    <input type="text" class="outline-none w-full max-w-[700px] text-lg dark:placeholder:text-dim-semi-dark-gray rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu" @keyup.enter="findSearchResults(storeSearchResult.currentRequest)"/>
+                    <button class="flex items-center justify-center bg-dim-semi-dark-gray/70 dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)">
+                        <ImageSearch stroke="stroke-dim-bright"></ImageSearch>
                     </button>
                     <SearchResult :data="storeSearchResult.data" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>
