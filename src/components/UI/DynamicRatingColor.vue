@@ -43,6 +43,6 @@ const changeColor = computed(() => {
                 stopColor: changeColor
             }"
         />
-        <p class="text-md font-bold absolute text-dim-white text-xl/3">{{ props.rating }}</p>
+        <p class="text-md font-bold absolute text-dim-dark-gray/80 dark:text-dim-white text-xl/3">{{ props.rating }}</p>
     </div>
 </template>

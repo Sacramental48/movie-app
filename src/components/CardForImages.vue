@@ -15,6 +15,8 @@ const props = defineProps({
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
 
 const findSelectedCard = () => {
+    console.log('meida', props.media);
+    console.log('meida_type', props.item.media_type);
     router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
 }
 </script>
@@ -38,6 +40,6 @@ const findSelectedCard = () => {
         :title="props.item.original_title || props.item.original_name">
             {{props.item.original_title || props.item.original_name}}
         </p>
-        <span class="text-start text-basic line-clamp-1 dark:text-dim-white/50" :title="props.item.character" v-if="props.item.character">{{props.item.character}}</span>
+        <span class="text-start text-basic line-clamp-1 text-dim-semi-dark-gray/70 dark:text-dim-white/50" :title="props.item.character" v-if="props.item.character">{{props.item.character}}</span>
     </div>
 </template>

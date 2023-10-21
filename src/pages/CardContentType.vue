@@ -123,10 +123,10 @@ const openTrailer = () => {
                 </div>
                 <div class="flex flex-col">
                     <div>
-                        <h2 class="text-4xl text-dim-white">{{getCurrentData.original_title || getCurrentData.name}}</h2>
+                        <h2 class="text-4xl text-dim-dark-gray dark:text-dim-white">{{getCurrentData.original_title || getCurrentData.name}}</h2>
                         <h4 class="text-gray-500 italic" v-if="getCurrentData.tagline">{{getCurrentData.tagline}}</h4>
                         <div class="flex gap-3 text-sm text-gray-400 mt-2 flex-wrap">
-                            <span v-for="item in getCurrentData.genres" :key="item.id" class="border px-1">{{item.name}}</span>
+                            <span v-for="item in getCurrentData.genres" :key="item.id" class="border px-1 border-dim-gray text-dim-semi-dark-gray dark:text-dim-gray">{{item.name}}</span>
                         </div>
                     </div>
                     <div class="flex items-center my-4 gap-4">
@@ -138,38 +138,38 @@ const openTrailer = () => {
                     </div>
                     <div class="mb-10">
                         <div v-if="getCurrentData.overview">
-                            <h2 class="text-lg font-semibold text-dim-white" >Overview</h2>
-                            <p class="text-dim-white">{{getCurrentData.overview}}</p>
+                            <h2 class="text-lg font-semibold text-dim-dark-gray dark:text-dim-white" >Overview</h2>
+                            <p class="text-dim-dark-gray dark:text-dim-white">{{getCurrentData.overview}}</p>
                         </div>
                     </div>
                     <div>
                         <div class="flex sm:gap-6 gap-2 pb-4 border-b text-dim-white border-b-dim-gray border-opacity-20 flex-wrap">
-                            <p v-if="getCurrentData.status">Status: 
-                                <span class="text-gray-400 ml-2 font-light">{{getCurrentData.status}}</span>
+                            <p class="dark:text-dim-gray text-dim-semi-dark-gray" v-if="getCurrentData.status">Status: 
+                                <span class="dark:text-gray-400/70 text-gray-500 ml-2 font-light">{{getCurrentData.status}}</span>
                             </p>
-                            <p v-if="getCurrentData.release_date">Release Date: 
-                                <span class="text-gray-400 ml-2 font-light">{{formatDate(getCurrentData.release_date)}}</span>
+                            <p class="dark:text-dim-gray text-dim-semi-dark-gray" v-if="getCurrentData.release_date">Release Date: 
+                                <span class="dark:text-gray-400/70 text-gray-500 ml-2 font-light">{{formatDate(getCurrentData.release_date)}}</span>
                             </p>
-                            <p v-if="getCurrentData.runtime">Runtime: 
-                                <span class="text-gray-400 ml-2 font-light">{{formatDuration(getCurrentData.runtime)}}</span>
+                            <p class="dark:text-dim-gray text-dim-semi-dark-gray" v-if="getCurrentData.runtime">Runtime: 
+                                <span class="dark:text-gray-400/70 text-gray-500 ml-2 font-light">{{formatDuration(getCurrentData.runtime)}}</span>
                             </p>
-                            <p v-if="getCurrentData.episode_run_time && getCurrentData.episode_run_time.length">Runtime: 
-                                <span class="text-gray-400 ml-2 font-light">{{formatDuration(getCurrentData.episode_run_time[0])}}
+                            <p class="dark:text-dim-gray text-dim-semi-dark-gray" v-if="getCurrentData.episode_run_time && getCurrentData.episode_run_time.length">Runtime: 
+                                <span class="dark:text-gray-400/70 text-gray-500 ml-2 font-light">{{formatDuration(getCurrentData.episode_run_time[0])}}
                                 </span>
                             </p>
-                            <p v-if="getCurrentData.first_air_date">First episode: 
-                                <span class="text-gray-400 ml-2 font-light">{{formatDate(getCurrentData.first_air_date)}}</span>
+                            <p class="dark:text-dim-gray text-dim-semi-dark-gray" v-if="getCurrentData.first_air_date">First episode: 
+                                <span class="dark:text-gray-400/70 text-gray-500 ml-2 font-light">{{formatDate(getCurrentData.first_air_date)}}</span>
                             </p>
-                            <p v-if="getCurrentData.last_air_date">Last episode: 
-                                <span class="text-gray-400 ml-2 font-light">{{formatDate(getCurrentData.last_air_date)}}</span>
+                            <p class="dark:text-dim-gray text-dim-semi-dark-gray" v-if="getCurrentData.last_air_date">Last episode: 
+                                <span class="dark:text-gray-400/70 text-gray-500 ml-2 font-light">{{formatDate(getCurrentData.last_air_date)}}</span>
                             </p>
                         </div>
                         <p class="border-b py-4 text-dim-white border-b-dim-gray border-opacity-20" v-if="getCurrentData.budget && getCurrentData.budget.length">Budget: 
-                            <span class="text-gray-400 ml-2">{{formattedNumber}}</span>
+                            <span class="dark:text-gray-400/70 text-gray-500 ml-2">{{formattedNumber}}</span>
                         </p>
-                        <p class="border-b py-4 text-dim-white border-b-dim-gray border-opacity-20" v-if="getCurrentData.created_by">
+                        <p class="border-b py-4 text-dim-dark-gray dark:text-dim-white border-b-dim-gray border-opacity-20" v-if="getCurrentData.created_by">
                             Developed by: 
-                            <span class="text-gray-400 ml-2" v-for="director in getCurrentData.created_by" :key="director">
+                            <span class="dark:text-gray-400/70 text-gray-500 ml-2" v-for="director in getCurrentData.created_by" :key="director">
                                 {{director.name}}
                             </span>
                         </p>

@@ -22,5 +22,8 @@
     body {
         @apply overflow-y-scroll;
     }
+    
+    :root {
+        @apply bg-dim-dark-gray
+    }
 }
-
