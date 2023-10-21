@@ -7,14 +7,9 @@ const routes = [
         component: () => import('../pages/Home.vue')
     },
     {
-        path: '/movie/card/:id',
-        name: 'movieDetails',
-        component: () => import('../pages/MovieDetails.vue')
-    },
-    {
-        path: '/tv/card/:id',
-        name: 'tvDetails',
-        component: () => import('../pages/TVShowDetails.vue')
+        path: '/:contentCardType/card/:id',
+        name: 'contentCardDetails',
+        component: () => import('../pages/CardContentType.vue')
     },
     {
         path: '/:contentType/:contentId',

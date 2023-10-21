@@ -20,8 +20,8 @@ const toggleTham = () => {
     emit('isActiv-handle', isActive.value)
 };
 
-const routerPush = (item) => {
-    router.push({path: `${item}`});
+const routerPushToContentType = (path) => {
+    router.push({ name: 'contentDetails', params: { contentType: path, contentId: '1' }});
     isActive.value = !isActive.value;
 };
 </script>
@@ -34,7 +34,7 @@ const routerPush = (item) => {
             </div>
         </div>
         <ul class="absolute left-0 right-0 top-11 w-full py-4 dark:text-dim-white text-dim-dark-gray bg-dim-dark-gray border-t dark:border-dim-semi-dark-gray border-dim-dark-gray cursor-pointer" v-if="isActive">
-            <li v-for="item in props.links" :key="item" class="px-6 py-2 text-lg text-dim-white hover:bg-neutral-400/10 hover:text-dim-bright w-full" @click="routerPush(item.path)">
+            <li v-for="item in props.links" :key="item" class="px-6 py-2 text-lg text-dim-white hover:bg-neutral-400/10 hover:text-dim-bright w-full" @click="routerPushToContentType(item.path)">
                 {{item.name}}
             </li>
         </ul>
