@@ -1,6 +1,6 @@
 <script setup>
 import { useSearchResult } from '@/store/getSearchResult';
-import { ref, onMounted, watch, onBeforeUnmount, onUnmounted, nextTick } from 'vue';
+import { ref, onMounted, watch, onBeforeUnmount, nextTick } from 'vue';
 import { useMovieApp } from '@/store/getMovieApp';
 import { useTVShow } from '@/store/getTVShow';
 import { useRouter, useRoute } from 'vue-router';
@@ -14,6 +14,7 @@ const storeTvShow = useTVShow();
 const storeSearchResult = useSearchResult();
 const movieItem = ref('');
 const isVisibleInput = ref(false);
+const isVisibleHamburger = ref(false);
 const router = useRouter();
 const route = useRoute();
 const headerRef = ref(null);
@@ -25,19 +26,24 @@ onMounted(() => {
     window.addEventListener('scroll', onScroll);
     window.addEventListener('wheel', handleMouseWheel);
     window.addEventListener('click', closeInput);
+    window.addEventListener('click', closeHamburger);
 });
 
 function searchMovieFunc() {
     movieApp.setSearchMovie(movieItem.value);
 };
 
-function changeVisibleValue() {
+function changeVisibleValueInput() {
     isVisibleInput.value = !isVisibleInput.value;
     
     nextTick(() => {
         inputFocus.value.focus();
     });
 
+};
+
+function changeVisibleValueHamburger() {
+    isVisibleHamburger.value = !isVisibleHamburger.value;
 };
 
 function getCurrentValueFromHamburgerTham(value) {
@@ -53,7 +59,7 @@ const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
-    sessionStorage.setItem('currentRequest', '');
+    storeSearchResult.$reset();
     await router.push({ name: 'contentDetails', params: { contentType: path, contentId: '1' }});
 };
 
@@ -61,7 +67,6 @@ const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
-    sessionStorage.setItem('currentRequest', '');
     await router.push({ path: '/' });
 };
 
@@ -107,15 +112,22 @@ const handleMouseWheel = (event) => {
 const closeInput = (event) => {
     if(isVisibleInput.value && event.target.tagName !== 'INPUT' && event.target.tagName !== 'BUTTON') {
         isVisibleInput.value = false;
+        console.log(isVisibleInput.value);
         movieItem.value = '';
     }
-    event.stopPropagation();
+};
+
+const closeHamburger = (event) => {
+    if (isVisibleHamburger.value && event.target.tagName !== 'BUTTON' && event.target.tagName !== 'UL' && event.target.tagName !== 'SPAN') {
+        isVisibleHamburger.value = false;
+    }
 };
 
 const findSearchResults = async(contentId) => {
     router.push({name: 'contentDetails', params: { contentType: 'search_result', contentId: '1' }});
     await storeSearchResult.getSearchResult();
     isVisibleInput.value = false;
+    isVisibleHamburger.value = false;
 };
 
 watch(searchContent, async val => {
@@ -124,6 +136,7 @@ watch(searchContent, async val => {
 
 onBeforeUnmount(() => {
     window.removeEventListener('click', closeInput);
+    window.removeEventListener('click', closeHamburger);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('wheel', handleMouseWheel);
 });
@@ -147,12 +160,12 @@ onBeforeUnmount(() => {
             </div>
             <div class="flex h-full items-center">
                 <div class="flex relative justify-end h-full max-sm:mr-4">
-                    <ImageSearch class="cursor-pointer" @click="changeVisibleValue" :isVisibleInput="isVisibleInput" stroke="dark:stroke-dim-white stroke-black"></ImageSearch>
+                    <ImageSearch class="cursor-pointer" @click="changeVisibleValueInput" stroke="dark:stroke-dim-white stroke-black"></ImageSearch>
                 </div>
                 <div class="flex border xs:flex absolute h-[50px] top-11 left-0 w-full z-10 animate-input-down" v-if="isVisibleInput">
-                    <input v-model="searchContent" ref="inputFocus" @click.stop @keyup.enter="findSearchResults(storeSearchResult.currentRequest)" type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-transparent bg-gray-300 dark:bg-dim-bright z-10">
+                    <input v-model="searchContent" ref="inputFocus" @click.stop @keyup.enter="findSearchResults(storeSearchResult.currentRequest)" type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-gray-300 dark:bg-dim-bright z-10">
                 </div>
-                <Hamburger :links="navigationLinks" @isActiv-handle="getCurrentValueFromHamburgerTham"/>
+                <Hamburger :links="navigationLinks" @isActive-handle="getCurrentValueFromHamburgerTham" :isActiveToggle="isVisibleHamburger" @click="changeVisibleValueHamburger" />
             </div>
         </div>
     </div>

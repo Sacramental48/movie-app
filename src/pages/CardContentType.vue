@@ -167,7 +167,7 @@ const openTrailer = () => {
                         <p class="border-b py-4 text-dim-white border-b-dim-gray border-opacity-20" v-if="getCurrentData.budget && getCurrentData.budget.length">Budget: 
                             <span class="dark:text-gray-400/70 text-gray-500 ml-2">{{formattedNumber}}</span>
                         </p>
-                        <p class="border-b py-4 text-dim-dark-gray dark:text-dim-white border-b-dim-gray border-opacity-20" v-if="getCurrentData.created_by">
+                        <p class="border-b py-4 text-dim-dark-gray dark:text-dim-white border-b-dim-gray border-opacity-20" v-if="getCurrentData.created_by && getCurrentData.created_by.length">
                             Developed by: 
                             <span class="dark:text-gray-400/70 text-gray-500 ml-2" v-for="director in getCurrentData.created_by" :key="director">
                                 {{director.name}}

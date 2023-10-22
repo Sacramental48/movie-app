@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watch, computed} from 'vue';
 import { useMovieApp } from '@/store/getMovieApp';
 import { useTVShow } from '@/store/getTVShow';
 import { useSearchResult } from '@/store/getSearchResult';
-import {useRoute} from 'vue-router';
+import { useRoute } from 'vue-router';
 
 import Slider from '@/components/SliderCarousel/Slider.vue';
 import CardForImages from '@/components/CardForImages.vue';
