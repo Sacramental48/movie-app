@@ -89,7 +89,7 @@ const formattedNumber = computed(() => {
 
 const openTrailer = () => {
     storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
-    for(let item of getVideosData) {
+    for(let item of getVideosData.value) {
         if(item.type === 'Trailer') {
             storeIsOpenValue.videoKey = item.key;
         }
@@ -98,7 +98,7 @@ const openTrailer = () => {
 </script>
 
 <template>
-    <div class="relative z-10">
+    <div class="z-10">
         <div class="w-full h-screen top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
              <img v-lazy="{ 
                 src: `https://image.tmdb.org/t/p/original${getCurrentData.backdrop_path}`, delay: 300 }" 
@@ -107,7 +107,7 @@ const openTrailer = () => {
                 v-if="getCurrentData.backdrop_path"
             />
             <div class="h-full w-full object-cover object-center dark:bg-dim-dark-gray" v-else></div>
-            <div class="w-full h-[200px] dark:bg-gradient-to-t from-dim-dark-gray from-10% to-div-semi-dark-gray to-100% absolute bottom-0 left-0"></div>
+            <div class="w-full h-[200px] bg-gradient-to-t from-dim-white from-10% to-dim-white/10 to-100% dark:bg-gradient-to-t dark:from-dim-dark-gray dark:from-20% dark:to-dim-semi-dark-gray/10 dark:to-100% absolute bottom-0 left-0"></div>
         </div>
         <Spinner v-if="getCurrentData.length === 0"></Spinner>
         <div class="flex flex-col sm:gap-16 gap-10 justify-center items-center container pt-32" v-else>
