@@ -21,7 +21,7 @@ const toggleHamburger = () => {
 };
 
 const routerPushToContentType = (path) => {
-    router.push({ name: 'contentDetails', params: { contentType: path, contentId: '1' }});
+    router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
     isActiveTheme.value = props.isActiveToggle;
 };
 </script>

@@ -20,7 +20,7 @@ const route = useRoute();
 const headerRef = ref(null);
 const activeTham = ref(null);
 const searchContent = ref('');
-const inputFocus = ref('');
+const inputFocus = ref(null);
 
 onMounted(() => {
     window.addEventListener('scroll', onScroll);
@@ -35,11 +35,10 @@ function searchMovieFunc() {
 
 function changeVisibleValueInput() {
     isVisibleInput.value = !isVisibleInput.value;
-    
+
     nextTick(() => {
         inputFocus.value.focus();
     });
-
 };
 
 function changeVisibleValueHamburger() {
@@ -60,7 +59,7 @@ const switchContent = async (path) => {
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
     storeSearchResult.$reset();
-    await router.push({ name: 'contentDetails', params: { contentType: path, contentId: '1' }});
+    await router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
 };
 
 const switchToHome = async () => {
@@ -123,11 +122,12 @@ const closeHamburger = (event) => {
     }
 };
 
-const findSearchResults = async(contentId) => {
-    router.push({name: 'contentDetails', params: { contentType: 'search_result', contentId: '1' }});
+const findSearchResults = async() => {
+    router.push({name: 'contentDetails', params: { contentType: 'search_result', id: '1' }});
     await storeSearchResult.getSearchResult();
     isVisibleInput.value = false;
     isVisibleHamburger.value = false;
+    searchContent.value = '';
 };
 
 watch(searchContent, async val => {
@@ -160,10 +160,13 @@ onBeforeUnmount(() => {
             </div>
             <div class="flex h-full items-center">
                 <div class="flex relative justify-end h-full max-sm:mr-4">
-                    <ImageSearch class="cursor-pointer" @click="changeVisibleValueInput" stroke="dark:stroke-dim-white stroke-black"></ImageSearch>
+                    <ImageSearch :disabled="isVisibleInput" class="cursor-pointer" @click="changeVisibleValueInput" stroke="dark:stroke-dim-white stroke-black"></ImageSearch>
                 </div>
-                <div class="flex border xs:flex absolute h-[50px] top-11 left-0 w-full z-10 animate-input-down" v-if="isVisibleInput">
-                    <input v-model="searchContent" ref="inputFocus" @click.stop @keyup.enter="findSearchResults(storeSearchResult.currentRequest)" type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-gray-300 dark:bg-dim-bright z-10">
+                <div class="flex xs:flex absolute h-[50px] top-11 left-0 w-full z-10 animate-input-down" v-if="isVisibleInput">
+                    <input v-model="searchContent" ref="inputFocus" @click.stop @keyup.enter="findSearchResults" type="text" placeholder="Search" class="block w-full sm:text-md outline-none text-xl pl-4 bg-gray-300 dark:bg-dim-bright z-10">
+                    <button class="flex items-center justify-center bg-dim-semi-dark-gray/70 dark:bg-dim-semi-dark-gray w-20" @click="findSearchResults">
+                        <ImageSearch stroke="stroke-dim-bright"></ImageSearch>
+                    </button>
                 </div>
                 <Hamburger :links="navigationLinks" @isActive-handle="getCurrentValueFromHamburgerTham" :isActiveToggle="isVisibleHamburger" @click="changeVisibleValueHamburger" />
             </div>
