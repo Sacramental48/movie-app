@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Rating from '@/components/UI/RatingStar.vue';
 const router = useRouter();
@@ -15,9 +14,9 @@ const props = defineProps({
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
 
 const findSelectedCard = () => {
-    console.log('meida', props.media);
-    console.log('meida_type', props.item.media_type);
-    router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
+    if(props.media || props.item.media_type) {
+        router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
+    }
 }
 </script>
 
