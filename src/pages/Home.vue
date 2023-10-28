@@ -1,6 +1,6 @@
 <script setup>
 import { useAllTrending } from '@/store/getAllTrending';
-import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue';
+import { onMounted, onBeforeUnmount, ref, watch, nextTick, computed } from 'vue';
 import { useTopRatedMovie } from '@/store/getTopRatedMovie';
 import { useTopRatedSerials } from '@/store/getTopRatedSerials';
 import { useSearchResult } from '@/store/getSearchResult';
@@ -50,6 +50,10 @@ const closeMenu = (event) => {
     }
 };
 
+const isInputHasSomeValues = computed(() => {
+    return searchContent.value.length !== 0;
+});
+
 const findSearchResults = () => {
     router.push({name: 'contentDetails', params: { contentType: 'search_result', id: '1'}});
 };
@@ -68,7 +72,7 @@ onBeforeUnmount(() => {
                 <p class="xs:text-xl text-base mb-10 dark:text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="flex w-full justify-center relative">
                     <input type="text" class="outline-none w-full max-w-[700px] text-lg dark:placeholder:text-dim-semi-dark-gray rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu" @keyup.enter="findSearchResults"/>
-                    <button class="flex items-center justify-center bg-dim-semi-dark-gray/70 dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults">
+                    <button class="flex items-center justify-center bg-dim-semi-dark-gray/70 dark:bg-dim-semi-dark-gray rounded-r-full w-20" :disabled="!isInputHasSomeValues" @click="findSearchResults">
                         <ImageSearch stroke="stroke-dim-bright"></ImageSearch>
                     </button>
                     <SearchResult :data="storeSearchResult.data" :searchContent="searchContent" v-if="isVisibleInput" />
