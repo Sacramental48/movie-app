@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useTVShow = defineStore('TVShow', {
     state: () => ({
@@ -31,7 +31,7 @@ export const useTVShow = defineStore('TVShow', {
             };
 
             try {
-                const response = await axios.request(config)
+                const response = await axios.request(config);
                 this.data = response.data.results;
             }catch(error) {
                 console.error(error);

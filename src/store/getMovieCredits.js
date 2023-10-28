@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useMovieCredits = defineStore('movieCredits', {
     state: () => ({
@@ -19,7 +19,7 @@ export const useMovieCredits = defineStore('movieCredits', {
                 }
             };
             try {
-                const response = await axios.request(config)
+                const response = await axios.request(config);
                 this.dataCast = response.data.cast;
                 this.dataCrew = response.data.crew;
             }catch(error) {

@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useSearchResult = defineStore('searchResult', {
     state: () => ({
@@ -39,7 +39,6 @@ export const useSearchResult = defineStore('searchResult', {
             sessionStorage.setItem('currentRequest', value);
         },
     }
-
 });
 
 

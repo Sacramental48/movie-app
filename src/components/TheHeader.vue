@@ -111,7 +111,6 @@ const handleMouseWheel = (event) => {
 const closeInput = (event) => {
     if(isVisibleInput.value && event.target.tagName !== 'INPUT' && event.target.tagName !== 'BUTTON') {
         isVisibleInput.value = false;
-        console.log(isVisibleInput.value);
         movieItem.value = '';
     }
 };

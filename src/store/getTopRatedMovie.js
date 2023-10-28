@@ -1,5 +1,5 @@
-import {defineStore} from 'pinia'
-import axios from 'axios'
+import {defineStore} from 'pinia';
+import axios from 'axios';
 
 export const useTopRatedMovie = defineStore('topRatedMovie', {
     state: () => ({
@@ -18,11 +18,11 @@ export const useTopRatedMovie = defineStore('topRatedMovie', {
                 }
             };
             try {
-                const response = await axios.request(config)
+                const response = await axios.request(config);
                 this.data = response.data.results;
             }catch(error) {
                 console.error(error);
             }
         },
     }
-})
+});

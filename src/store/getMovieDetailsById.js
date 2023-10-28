@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
@@ -21,12 +21,12 @@ export const useMovieDetailsById = defineStore('details-movie', {
                 }
             };
             try {
-                const response = await axios.request(config)
-                this.currentData = response.data
+                const response = await axios.request(config);
+                this.currentData = response.data;
             } catch(error) {
                 router.push({ name: 'PageNotFound' });
             }
         }
     }
-})
+});
 
