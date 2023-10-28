@@ -40,19 +40,15 @@ const getVideosData = ref([]);
 
 onMounted(async() => {
     if(route.params.contentCardType === 'movie') {
-        try {
-            storeMovieDetails.currentId = route.params.id;
-            storeMovieCredits.currentId = route.params.id;
-            storeMovieVideo.currentId = route.params.id;
-            await storeMovieDetails.getDetailsMovieById();
-            await storeMovieCredits.getMovieCredits();
-            await storeMovieVideo.getMovieVideo();
-            getCurrentData.value = storeMovieDetails.currentData;
-            getCreditsData.value = storeMovieCredits.dataCast;
-            getVideosData.value = storeMovieVideo.currentData;
-        } catch(e) {
-            console.log(e);
-        }
+        storeMovieDetails.currentId = route.params.id;
+        storeMovieCredits.currentId = route.params.id;
+        storeMovieVideo.currentId = route.params.id;
+        await storeMovieDetails.getDetailsMovieById();
+        await storeMovieCredits.getMovieCredits();
+        await storeMovieVideo.getMovieVideo();
+        getCurrentData.value = storeMovieDetails.currentData;
+        getCreditsData.value = storeMovieCredits.dataCast;
+        getVideosData.value = storeMovieVideo.currentData;
     }
     if(route.params.contentCardType === 'tv') {
         storeTVShowDetails.currentId = route.params.id;
