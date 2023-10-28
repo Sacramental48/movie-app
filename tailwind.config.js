@@ -16,7 +16,9 @@ module.exports = {
             xl: "1200px",
             xxl: "1440px",
         },
-
+        fontFamily: {
+            'sans': ['Inter', 'Arial', 'sans-serif', 'system-ui'],
+        },
         extend: {
             animation: {
                 'header-up': 'header-up-ani 1s forwards',

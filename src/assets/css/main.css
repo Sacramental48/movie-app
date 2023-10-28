@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 @layer components {
     .container {
@@ -18,12 +19,8 @@
     img[lazy=loading] {
         @apply max-w-xl min-h-[240px] max-h-min dark:bg-dim-lazy-load contrast-125 overflow-hidden rounded-lg;
     }
-
-    body {
-        @apply overflow-y-scroll;
-    }
     
     :root {
-        @apply bg-dim-dark-gray
+        @apply bg-dim-dark-gray font-sans;
     }
 }
