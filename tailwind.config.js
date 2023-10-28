@@ -49,7 +49,7 @@ module.exports = {
                     'dark-gray': '#262626',
                     'color-for-rating': '#ffd24d',
                     'lazy-load': '#333333',
-                    'hover-fuchsia': 'rgb(162, 28, 175);'
+                    'hover-fuchsia': '#A21CAF'
                 },
             },
 
