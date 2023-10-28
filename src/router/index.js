@@ -7,6 +7,10 @@ const routes = [
         component: () => import('../pages/Home.vue')
     },
     {
+        path: '/:catchAll(.*)',
+        redirect: { name: 'PageNotFound', params: {} },
+    },
+    {
         path: '/:contentType/:id',
         name: 'contentDetails',
         component: () => import('../pages/CardList.vue'),

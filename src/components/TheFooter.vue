@@ -4,7 +4,7 @@ import ImageTelegramVue from "./Images/ImageTelegram.vue";
 import ImageFacebookVue from "./Images/ImageFacebook.vue";
 import ImageTwitchVue from "./Images/ImageTwitch.vue";
 
-const list = ['Info', 'Support', 'About', 'Privacy Policy'];
+const list = ['About', 'Contact', 'Support', 'Privacy Policy'];
 const listComponents = [ImageInstagramVue, ImageTelegramVue, ImageFacebookVue, ImageTwitchVue];
 </script>
 
