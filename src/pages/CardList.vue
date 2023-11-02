@@ -78,7 +78,6 @@ const displayData = computed(() => {
 onUnmounted(() => {
     storeMovieApp.$reset();
     storeTvShow.$reset();
-    storeSearchResult.$reset();
 });
 </script>
 
@@ -96,12 +95,14 @@ onUnmounted(() => {
                  <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="displayData.length !== 0">
                     <CardForImages v-for="item in displayData.data" :key="item.id" :item="item" :media="displayData.media"/>
                 </div>
-                <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" v-show="media.data.length">
-                    <PaginationPage
-                        :currentPageCount="currentPageCount"
-                        :media="route.params.contentType"
-                        :data="media"
-                    />
+                <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" >
+                    <div v-if="media.data.length">
+                        <PaginationPage
+                            :currentPageCount="currentPageCount"
+                            :media="route.params.contentType"
+                            :data="media"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -58,7 +58,6 @@ const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
-    storeSearchResult.$reset();
     await router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
 };
 
@@ -66,6 +65,7 @@ const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
+    storeSearchResult.$reset();
     await router.push({ path: '/' });
 };
 

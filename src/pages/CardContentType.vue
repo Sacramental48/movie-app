@@ -61,6 +61,7 @@ onMounted(async() => {
         getCreditsData.value = storeTvCredits.dataCast;
         getVideosData.value = storeTvVideo.currentData;
     }
+    console.log(getVideosData.value);
 });
 
 onUnmounted(() => {
@@ -94,7 +95,19 @@ const openTrailer = () => {
             storeIsOpenValue.videoKey = item.key;
         }
     }
+    console.log(getVideosData.value);
 };
+
+const hasTrailerActive = computed(() => {
+    const hasTrailer = ref(null);
+
+    for(let item of getVideosData.value) {
+        if(item.type === 'Trailer') {
+            hasTrailer.value = item.key;
+        }
+    }
+    return hasTrailer.value;
+});
 </script>
 
 <template>
@@ -131,7 +144,7 @@ const openTrailer = () => {
                     </div>
                     <div class="flex items-center my-4 gap-4">
                         <DynamicRating :rating="formattedRating(getCurrentData.vote_average)"></DynamicRating>
-                        <div class="flex gap-2 justify-center items-center dark:text-dim-white text-xl hover: duration-300 cursor-pointer group" @click="openTrailer">
+                        <div v-if="hasTrailerActive" class="flex gap-2 justify-center items-center dark:text-dim-white text-xl hover: duration-300 cursor-pointer group" @click="openTrailer">
                             <ImagePlay />
                             <p class="group-hover:text-dim-hover-fuchsia duration-300">Trailer</p>
                         </div>
