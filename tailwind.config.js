@@ -19,6 +19,9 @@ module.exports = {
         fontFamily: {
             'sans': ['Inter', 'Arial', 'sans-serif', 'system-ui'],
         },
+        height: {
+            'calc12': 'calc((1vw + 1vh) * 24)',
+        },
         extend: {
             animation: {
                 'header-up': 'header-up-ani 1s forwards',

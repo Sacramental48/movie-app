@@ -88,7 +88,7 @@ const formattedNumber = computed(() => {
 });
 
 const openTrailer = () => {
-    storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
+    storeIsOpenValue.isOpenWindow = !storeIsOpenValue.isOpenWindow;
     for(let item of getVideosData.value) {
         if(item.type === 'Trailer') {
             storeIsOpenValue.videoKey = item.key;
@@ -178,9 +178,9 @@ const openTrailer = () => {
             </div>
             <Slider :getDataFromStores="getCreditsData" v-if="getCreditsData.length" title="Cast" />
             <Slider :video="getVideosData" v-if="getVideosData.length" title="Video" />
-            <Window :show="storeIsOpenValue.isOpen" maxHeight="80%" maxWidth="64%">
+            <Window :show="storeIsOpenValue.isOpenWindow">
                 <iframe 
-                    class="rounded-lg w-full h-full" 
+                    class="rounded-lg w-[80%] h-calc12"
                     allowfullscreen
                     :src="`https://www.youtube.com/embed/${storeIsOpenValue.videoKey}?autoplay=1&iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`">
                 </iframe>

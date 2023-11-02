@@ -8,23 +8,17 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    maxHeight: {
-        type: String
-    },
-    maxWidth: {
-        type: String
-    },
 });
 
-function hideDialog() {
-    storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
+console.log(storeIsOpenValue.isOpenWindow);
+
+function hideDialogWindow() {
+    storeIsOpenValue.isOpenWindow = !storeIsOpenValue.isOpenWindow;
 };
 </script>
 
 <template>
-    <div v-if="show" @click="hideDialog" class="flex fixed z-10 inset-0 bg-black/[0.2]">
-        <div class="m-auto h-full w-full flex items-center justify-center" :style="{maxHeight, maxWidth}" @click.stop>
-            <slot />
-        </div>
+    <div v-if="show" @click.stop="hideDialogWindow" class="flex fixed items-center justify-center z-40 inset-0 bg-black/[0.2] backdrop-blur-sm">
+        <slot />
     </div>
 </template>

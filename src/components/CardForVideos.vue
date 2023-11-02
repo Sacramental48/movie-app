@@ -8,7 +8,7 @@ import Window from "@/components/UI/DialogWindow.vue";
 const storeIsOpenValue = useIsOpenValue();
 
 const toggleDialog = (key) => {
-    storeIsOpenValue.isOpen = !storeIsOpenValue.isOpen;
+    storeIsOpenValue.isOpenWindow = !storeIsOpenValue.isOpenWindow;
     storeIsOpenValue.videoKey = key;
 };
 
