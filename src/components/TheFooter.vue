@@ -9,7 +9,7 @@ const listComponents = [ImageInstagramVue, ImageTelegramVue, ImageFacebookVue, I
 </script>
 
 <template>
-    <div class="flex flex-col items-center justify-center dark:bg-black/30 h-[200px] bg-dim-bright mt-20">
+    <div class="flex flex-col items-center justify-center dark:bg-black/30 h-[200px] bg-dim-bright mt-14">
         <div class="flex gap-4 mb-4">
             <span class="cursor-pointer fill-dim-semi-dark-gray dark:hover:fill-fuchsia-700/80 hover:fill-fuchsia-700 duration-300" v-for="item in listComponents" :key="item.id">
                 <component :is="item" />
