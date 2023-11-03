@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,11 +17,10 @@
     }
 
     img[lazy=loading] {
-        @apply max-w-xl min-h-[240px] max-h-min dark:bg-dim-lazy-load contrast-125 overflow-hidden rounded-lg;
+        @apply max-w-xl min-h-[190px] max-h-min dark:bg-dim-lazy-load bg-dim-gray/70 contrast-125 overflow-hidden rounded-lg animate-pulse;
     }
-
-    body {
-        @apply overflow-y-scroll;
+    
+    :root {
+        @apply bg-dim-dark-gray font-sans;
     }
 }
-

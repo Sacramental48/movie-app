@@ -1,15 +1,15 @@
 <script setup>
-import { useAllTrending } from '@/store/getAllTrending'
-import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
-import { useTopRatedMovie } from '@/store/getTopRatedMovie'
-import { useTopRatedSerials } from '@/store/getTopRatedSerials'
+import { useAllTrending } from '@/store/getAllTrending';
+import { onMounted, onBeforeUnmount, ref, watch, nextTick, computed } from 'vue';
+import { useTopRatedMovie } from '@/store/getTopRatedMovie';
+import { useTopRatedSerials } from '@/store/getTopRatedSerials';
 import { useSearchResult } from '@/store/getSearchResult';
 import { useRouter } from 'vue-router';
 
 import Slider from '@/components/SliderCarousel/Slider.vue'
 import Spinner from '@/components/UI/Spinner.vue'
 import SearchResult from '@/components/UI/SearchResult.vue';
-import ImageSearch from '@/components/Images/ImageSearch.vue'
+import ImageSearch from '@/components/Images/ImageSearch.vue';
 
 const router = useRouter();
 const isVisibleInput = ref(false);
@@ -50,8 +50,12 @@ const closeMenu = (event) => {
     }
 };
 
-const findSearchResults = (contentId) => {
-    router.push({name: 'contentDetails', params: { contentType: 'search_result', contentId: '1' }});
+const isInputHasSomeValues = computed(() => {
+    return searchContent.value.length !== 0;
+});
+
+const findSearchResults = () => {
+    router.push({name: 'contentDetails', params: { contentType: 'search_result', id: '1'}});
 };
 
 onBeforeUnmount(() => {
@@ -64,12 +68,12 @@ onBeforeUnmount(() => {
         <Spinner v-if="storeTrending.data.length === 0 && storeTopMovie.data.length === 0 && storeTopSerials.data.length === 0"/>
         <div class="flex flex-col" v-else>
             <div class=" flex flex-col items-center justify-center mb-24">
-                <h1 class="xs:text-7xl text-4xl text-dim-white mb-2">Welcome</h1>
-                <p class="xs:text-xl text-base mb-10 text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
+                <h1 class="xs:text-7xl text-4xl dark:text-dim-white mb-2">Welcome</h1>
+                <p class="xs:text-xl text-base mb-10 dark:text-dim-gray text-center">Millions of movies and TV shows. Сhoose your favourite right now.</p>
                 <div class="flex w-full justify-center relative">
-                    <input type="text" class="outline-none w-full max-w-[700px] text-lg rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu" @keyup.enter="findSearchResults(storeSearchResult.currentRequest)"/>
-                    <button class="flex items-center justify-center dark:bg-dim-semi-dark-gray rounded-r-full w-20" @click="findSearchResults(storeSearchResult.currentRequest)">
-                        <ImageSearch></ImageSearch>
+                    <input type="text" class="outline-none w-full max-w-[700px] text-lg dark:placeholder:text-dim-semi-dark-gray rounded-l-full py-2 pl-4" placeholder="Find films or TV shows!" v-model="searchContent" ref="isInput" @click.stop="closeMenu" @keyup.enter="findSearchResults"/>
+                    <button class="flex items-center justify-center bg-dim-semi-dark-gray/70 dark:bg-dim-semi-dark-gray rounded-r-full w-20" :disabled="!isInputHasSomeValues" @click="findSearchResults">
+                        <ImageSearch :disabled="!isInputHasSomeValues" stroke="stroke-dim-bright"></ImageSearch>
                     </button>
                     <SearchResult :data="storeSearchResult.data" :searchContent="searchContent" v-if="isVisibleInput" />
                 </div>

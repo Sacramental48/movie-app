@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import CardForImages from '../CardForImages.vue'
-import CardForVideos from '../CardForVideos.vue'
+import { ref, onMounted, computed } from 'vue';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
+import CardForImages from '../CardForImages.vue';
+import CardForVideos from '../CardForVideos.vue';
 
-import 'vue3-carousel/dist/carousel.css'
+import 'vue3-carousel/dist/carousel.css';
 
 const props = defineProps({
     getDataFromStores: {
@@ -22,7 +22,7 @@ const props = defineProps({
     title: {
         type: String,
         required: true,
-    }
+    },
 });
 
 const settings = ref ({
@@ -31,39 +31,35 @@ const settings = ref ({
 });
 
 const imageBreakpoints = ref({
-    340: {
+    280: {
         itemsToShow: 2,
         snapAlign: 'start',
     },
-    400: {
-        itemsToShow: 2,
-        snapAlign: 'start',
-    },
-    575: {
+    440: {
         itemsToShow: 3,
         snapAlign: 'start',
     },
-    785: {
+    700: {
         itemsToShow: 4,
         snapAlign: 'start',
     },
-    990: {
+    900: {
         itemsToShow: 5,
         snapAlign: 'start',
-    },
+    }
 });
 
 const videoBreakpoints = ref({
-    400: {
-        itemsToShow: 1,
-        snapAlign: 'start',
-    },
-    785: {
+    480: {
         itemsToShow: 2,
         snapAlign: 'start',
     },
-    990: {
+    785: {
         itemsToShow: 3,
+        snapAlign: 'start',
+    },
+    990: {
+        itemsToShow: 4,
         snapAlign: 'start',
     },
 });

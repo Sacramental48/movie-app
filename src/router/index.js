@@ -7,20 +7,40 @@ const routes = [
         component: () => import('../pages/Home.vue')
     },
     {
-        path: '/movie/card/:id',
-        name: 'movieDetails',
-        component: () => import('../pages/MovieDetails.vue')
+        path: '/:catchAll(.*)',
+        redirect: { name: 'PageNotFound', params: {} },
     },
     {
-        path: '/tv/card/:id',
-        name: 'tvDetails',
-        component: () => import('../pages/TVShowDetails.vue')
-    },
-    {
-        path: '/:contentType/:contentId',
+        path: '/:contentType/:id',
         name: 'contentDetails',
-        component: () => import('../pages/CardList.vue')
+        component: () => import('../pages/CardList.vue'),
+        beforeEnter: (to, from, next) => {
+            const allowedContentTypes = ['movie', 'tv', 'search_result'];
+            if (allowedContentTypes.includes(to.params.contentType)) {
+                next();
+            } else {
+                next({ name: 'PageNotFound' });
+            }
+        }
     },
+    {
+        path: '/:contentCardType/card/:id',
+        name: 'contentCardDetails',
+        component: () => import('../pages/CardContentType.vue'),
+        beforeEnter: (to, from, next) => {
+            const allowedContentCardTypes = ['movie', 'tv'];
+            if (allowedContentCardTypes.includes(to.params.contentCardType)) {
+                next();
+            } else {
+                next({ name: 'PageNotFound' });
+            }
+        }
+    },
+    {
+        path: '/PageNotFound',
+        name: 'PageNotFound',
+        component: () => import('../pages/PageNotFound.vue')
+    }
 ]
 
 const router = createRouter({

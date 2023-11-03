@@ -1,7 +1,6 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 import axios from 'axios';
-
-
+import { useRouter } from 'vue-router';
 
 export const useTVShowDetailsById = defineStore('details-TVShow', {
     state: () => ({
@@ -11,6 +10,7 @@ export const useTVShowDetailsById = defineStore('details-TVShow', {
 
     actions: {
         async getDetailsTvById() {
+            const router = useRouter();
             const config = {
                 method: 'GET',
                 url: `https://api.themoviedb.org/3/tv/${this.currentId}`,
@@ -25,8 +25,9 @@ export const useTVShowDetailsById = defineStore('details-TVShow', {
                 this.currentData = response.data;
             } catch(error) {
                 console.log(error);
+                router.push({ name: 'PageNotFound' });
             }
         }
     }
-})
+});
 

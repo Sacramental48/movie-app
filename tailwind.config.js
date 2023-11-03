@@ -16,7 +16,12 @@ module.exports = {
             xl: "1200px",
             xxl: "1440px",
         },
-
+        fontFamily: {
+            'sans': ['Inter', 'Arial', 'sans-serif', 'system-ui'],
+        },
+        height: {
+            'calc12': 'calc((1vw + 1vh) * 24)',
+        },
         extend: {
             animation: {
                 'header-up': 'header-up-ani 1s forwards',
@@ -47,7 +52,7 @@ module.exports = {
                     'dark-gray': '#262626',
                     'color-for-rating': '#ffd24d',
                     'lazy-load': '#333333',
-                    'hover-fuchsia': 'rgb(162, 28, 175);'
+                    'hover-fuchsia': '#A21CAF'
                 },
             },
 

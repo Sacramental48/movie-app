@@ -1,5 +1,5 @@
-import {defineStore} from 'pinia'
-import axios from 'axios'
+import {defineStore} from 'pinia';
+import axios from 'axios';
 
 export const useAllTrending = defineStore('allTrending', {
     state: () => ({
@@ -26,4 +26,4 @@ export const useAllTrending = defineStore('allTrending', {
             }
         },
     }
-})
+});

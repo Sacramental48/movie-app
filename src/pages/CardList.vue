@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watch, computed} from 'vue';
 import { useMovieApp } from '@/store/getMovieApp';
 import { useTVShow } from '@/store/getTVShow';
 import { useSearchResult } from '@/store/getSearchResult';
-import {useRoute} from 'vue-router';
+import { useRoute } from 'vue-router';
 
 import Slider from '@/components/SliderCarousel/Slider.vue';
 import CardForImages from '@/components/CardForImages.vue';
@@ -46,10 +46,7 @@ onMounted(async() => {
     if(route.params.contentType === 'search_result') {
         storeSearchResult.getSearchResult();
         currentPageCount.value = storeSearchResult.currentResultPage;
-        console.log(storeSearchResult.data);
     }
-    console.log('movie', storeMovieApp.data.length !== 0 );
-    console.log('tv', storeTvShow.data.length !== 0 );
 });
 
 const pageName = computed(() => {
@@ -61,21 +58,26 @@ const pageName = computed(() => {
 
 const displayData = computed(() => {
     let data = [];
+    let media = ''
     if (route.params.contentType === 'movie') {
         data = storeMovieApp.data;
+        media = 'movie';
     } else if (route.params.contentType === 'tv') {
         data = storeTvShow.data;
+        media = 'tv';
     } else if (route.params.contentType === 'search_result') {
         data = storeSearchResult.data;
+        for(let item of storeSearchResult.data) {
+            media = item.media_type;
+        }
     }
 
-    return data;
+    return {data, media};
 });
 
 onUnmounted(() => {
     storeMovieApp.$reset();
     storeTvShow.$reset();
-    storeSearchResult.$reset();
 });
 </script>
 
@@ -91,14 +93,16 @@ onUnmounted(() => {
             </div>
             <div class="flex flex-col justify-center w-full items-center">
                  <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="displayData.length !== 0">
-                    <CardForImages v-for="item in displayData" :key="item.id" :item="item" :media="route.params.contentType"/>
+                    <CardForImages v-for="item in displayData.data" :key="item.id" :item="item" :media="displayData.media"/>
                 </div>
-                <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" v-show="media.data.length">
-                    <PaginationPage
-                        :currentPageCount="currentPageCount"
-                        :media="route.params.contentType"
-                        :data="media"
-                    />
+                <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" >
+                    <div v-if="media.data.length">
+                        <PaginationPage
+                            :currentPageCount="currentPageCount"
+                            :media="route.params.contentType"
+                            :data="media"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

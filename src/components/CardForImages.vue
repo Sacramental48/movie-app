@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import Rating from '@/components/UI/RatingStar.vue'
+import { useRouter } from 'vue-router';
+import Rating from '@/components/UI/RatingStar.vue';
 const router = useRouter();
 const props = defineProps({
     item: {
@@ -15,7 +14,9 @@ const props = defineProps({
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
 
 const findSelectedCard = () => {
-    router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
+    if(props.media || props.item.media_type) {
+        router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
+    }
 }
 </script>
 
@@ -34,10 +35,10 @@ const findSelectedCard = () => {
             </div>
         </div>
         <p 
-        class="text-start text-xl line-clamp-1 text-dim-white" 
+        class="text-start text-xl line-clamp-1 dark:text-dim-white" 
         :title="props.item.original_title || props.item.original_name">
             {{props.item.original_title || props.item.original_name}}
         </p>
-        <span class="text-start text-basic line-clamp-1 dark:text-dim-white/50" :title="props.item.character" v-if="props.item.character">{{props.item.character}}</span>
+        <span class="text-start text-basic line-clamp-1 text-dim-semi-dark-gray/70 dark:text-dim-white/50" :title="props.item.character" v-if="props.item.character">{{props.item.character}}</span>
     </div>
 </template>
