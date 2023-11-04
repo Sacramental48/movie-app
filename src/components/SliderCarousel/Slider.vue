@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { Carousel, Slide, Navigation } from 'vue3-carousel';
+import { Carousel, Slide } from 'vue3-carousel';
 import CardForImages from '../CardForImages.vue';
 import CardForVideos from '../CardForVideos.vue';
 

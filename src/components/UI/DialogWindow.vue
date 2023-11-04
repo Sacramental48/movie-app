@@ -10,8 +10,6 @@ const props = defineProps({
     },
 });
 
-console.log(storeIsOpenValue.isOpenWindow);
-
 function hideDialogWindow() {
     storeIsOpenValue.isOpenWindow = !storeIsOpenValue.isOpenWindow;
 };

@@ -61,7 +61,6 @@ onMounted(async() => {
         getCreditsData.value = storeTvCredits.dataCast;
         getVideosData.value = storeTvVideo.currentData;
     }
-    console.log(getVideosData.value);
 });
 
 onUnmounted(() => {
