@@ -22,15 +22,15 @@ const currentContentType = ref('');
 
 watch(route, async value => {
     if(value.params.contentType === 'movie') {
-        storeTvShow.$reset();
         await storeMovieApp.getMovieData();
     }
     if(value.params.contentType === 'tv') {
-        storeMovieApp.$reset();
         await storeTvShow.getTVShowData();
     }
     if(value.params.contentType === 'search_result') {
         storeSearchResult.getSearchResult();
+        storeMovieApp.$reset();
+        storeTvShow.$reset();
     }
 });
 

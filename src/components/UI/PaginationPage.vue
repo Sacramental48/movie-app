@@ -1,10 +1,15 @@
 <script setup>
-import {ref, watch} from 'vue';
-import { useMovieApp } from '../../store/getMovieApp';
+import { ref } from 'vue';
+import { useMovieApp } from '@/store/getMovieApp';
+import { useTVShow } from '@/store/getTVShow';
+import { useSearchResult } from '@/store/getSearchResult';
 import Paginate from "vuejs-paginate-next";
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-const route = useRoute();
+const storeMovieApp = useMovieApp();
+const storeTvShow = useTVShow();
+const storeSearchResult = useSearchResult();
+
 const router = useRouter();
 
 const props = defineProps({
@@ -17,14 +22,11 @@ const props = defineProps({
 });
 
 const changePage = async (pageNum) => {
-    try {
-        props.data.setCurrentPage(pageNum);
-        await router.push({ path: `/${props.media}/${pageNum}` });
-    } catch(e) {
-        console.log(e);
-    } finally {
-        location.reload();
-    }
+    props.data.setCurrentPage(pageNum);
+    await storeMovieApp.$reset();
+    await storeTvShow.$reset();
+    await storeSearchResult.$reset();
+    await router.push({ name: 'contentDetails', params: { contentType: props.media }, query: { page: pageNum } });
 };
 
 const currentPageCount = ref(parseInt(props.data.currentPageMovie || props.data.currentPageSerials || props.data.currentResultPage));

@@ -1,6 +1,6 @@
 <script setup>
-import { useSearchResult } from '@/store/getSearchResult';
 import { ref, onMounted, watch, onBeforeUnmount, nextTick, computed } from 'vue';
+import { useSearchResult } from '@/store/getSearchResult';
 import { useMovieApp } from '@/store/getMovieApp';
 import { useTVShow } from '@/store/getTVShow';
 import { useRouter, useRoute } from 'vue-router';
@@ -58,14 +58,24 @@ const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
-    await router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
+    if(path === 'tv' && storeMovieApp.data.length !== 0) {
+        storeMovieApp.$reset();
+    }
+
+    if(path === 'movie' && storeTvShow.data.length !== 0) {
+        storeTvShow.$reset();
+
+    }
+    storeSearchResult.$reset();
+    await router.push({ name: 'contentDetails', params: { contentType: path }});
 };
 
 const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
-    storeSearchResult.$reset();
+    storeTvShow.$reset();
+    storeMovieApp.$reset();
     await router.push({ path: '/' });
 };
 
