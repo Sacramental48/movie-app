@@ -17,6 +17,10 @@ const findSelectedCard = () => {
     if(props.media || props.item.media_type) {
         router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
     }
+
+    if(props.item.media_type) {
+        router.push({path:`/${props.item.media_type}/card/${props.item.id}`});
+    }
 }
 </script>
 
