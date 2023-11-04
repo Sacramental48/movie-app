@@ -55,7 +55,7 @@ const isInputHasSomeValues = computed(() => {
 });
 
 const findSearchResults = () => {
-    router.push({name: 'contentDetails', params: { contentType: 'search_result', id: '1'}});
+    router.push({name: 'contentDetails', params: { contentType: 'search_result'}});
 };
 
 onBeforeUnmount(() => {

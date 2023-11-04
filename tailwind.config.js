@@ -20,7 +20,7 @@ module.exports = {
             'sans': ['Inter', 'Arial', 'sans-serif', 'system-ui'],
         },
         height: {
-            'calc12': 'calc((1vw + 1vh) * 24)',
+            'calc24': 'calc((1vw + 1vh) * 24)',
         },
         extend: {
             animation: {

@@ -11,7 +11,7 @@ const routes = [
         redirect: { name: 'PageNotFound', params: {} },
     },
     {
-        path: '/:contentType/:id',
+        path: '/:contentType',
         name: 'contentDetails',
         component: () => import('../pages/CardList.vue'),
         beforeEnter: (to, from, next) => {
@@ -37,7 +37,7 @@ const routes = [
         }
     },
     {
-        path: '/PageNotFound',
+        path: '/not-found',
         name: 'PageNotFound',
         component: () => import('../pages/PageNotFound.vue')
     }

@@ -61,7 +61,6 @@ onMounted(async() => {
         getCreditsData.value = storeTvCredits.dataCast;
         getVideosData.value = storeTvVideo.currentData;
     }
-    console.log(getVideosData.value);
 });
 
 onUnmounted(() => {
@@ -193,7 +192,7 @@ const hasTrailerActive = computed(() => {
             <Slider :video="getVideosData" v-if="getVideosData.length" title="Video" />
             <Window :show="storeIsOpenValue.isOpenWindow">
                 <iframe 
-                    class="rounded-lg w-[80%] h-calc12"
+                    class="rounded-lg w-[80%] h-calc24"
                     allowfullscreen
                     :src="`https://www.youtube.com/embed/${storeIsOpenValue.videoKey}?autoplay=1&iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`">
                 </iframe>

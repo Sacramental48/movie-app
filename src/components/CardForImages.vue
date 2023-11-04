@@ -14,8 +14,14 @@ const props = defineProps({
 const notFound = new URL('@/assets/img/noPictureAvailable.jpg', import.meta.url);
 
 const findSelectedCard = () => {
-    if(props.media || props.item.media_type) {
-        router.push({path:`/${props.media || props.item.media_type}/card/${props.item.id}`});
+    if(props.media) {
+        router.push({path:`/${props.media}/card/${props.item.id}`});
+    }
+
+    if(props.item.media_type !== 'person') {
+        router.push({path:`/${props.item.media_type}/card/${props.item.id}`});
+    } else {
+        return false;
     }
 }
 </script>
@@ -31,7 +37,7 @@ const findSelectedCard = () => {
             />
             <img :src="notFound" alt="Not Found" v-else>
             <div class="flex justify-between items-end bottom-0 right-0 absolute pb-2 px-2 rounded-xl">
-                <Rating v-if="props.item.vote_average" :rating="props.item.vote_average" :release="props.item.release_date"></Rating>
+                <Rating v-if="props.item.vote_average" :rating="props.item.vote_average"></Rating>
             </div>
         </div>
         <p 
