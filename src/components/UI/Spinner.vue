@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute top-1/3 left-1/2">
+    <div class="flex items-center justify-center pt-40">
         <svg class="w-16 h-16 mr-3 -ml-1 text-blue-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 24 24">
             <circle class="opacity-10" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
