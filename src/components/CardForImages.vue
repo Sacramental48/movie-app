@@ -18,10 +18,8 @@ const findSelectedCard = () => {
         router.push({path:`/${props.media}/card/${props.item.id}`});
     }
 
-    if(props.item.media_type !== 'person') {
+    if(props.item.media_type) {
         router.push({path:`/${props.item.media_type}/card/${props.item.id}`});
-    } else {
-        return false;
     }
 }
 </script>
