@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useTVShow } from '@/store/getTVShow';
+import { useMovieApp } from '@/store/getMovieApp';
+
+const storeTvShow = useTVShow();
+const storeMovieApp = useMovieApp();
 
 const router = useRouter();
 const emit = defineEmits(['isActive-handle']);
@@ -21,8 +26,17 @@ const toggleHamburger = () => {
 };
 
 const routerPushToContentType = (path) => {
-    router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
-    isActiveTheme.value = props.isActiveToggle;
+    if(path === 'movie') {
+        router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
+        isActiveTheme.value = props.isActiveToggle;
+        storeTvShow.$reset();
+    }
+
+    if(path === 'tv') {
+        router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
+        isActiveTheme.value = props.isActiveToggle;
+        storeMovieApp.$reset();
+    }
 };
 </script>
 
@@ -33,7 +47,7 @@ const routerPushToContentType = (path) => {
                 <span class="tham-inner dark:bg-dim-white" />
             </button>
         </div>
-        <ul class="absolute left-0 right-0 top-11 w-full py-4 dark:text-dim-white text-dim-dark-gray bg-gray-300 dark:bg-dim-dark-gray border-t dark:border-dim-semi-dark-gray border-dim-dark-gray cursor-pointer" v-if="props.isActiveToggle">
+        <ul class="absolute left-0 right-0 top-11 w-full py-2 dark:text-dim-white border-b text-dim-dark-gray bg-gray-300 dark:bg-dim-dark-gray dark:border-dim-semi-dark-gray border-dim-gray cursor-pointer" v-if="props.isActiveToggle">
             <li v-for="item in props.links" :key="item" class="px-6 py-2 text-lg text-dim=dark-gray dark:text-dim-white hover:bg-gray-400 dark:hover:bg-neutral-400/10 hover:text-dim-bright w-full" @click="routerPushToContentType(item.path)">
                 {{item.name}}
             </li>

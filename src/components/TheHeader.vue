@@ -77,6 +77,7 @@ const switchToHome = async () => {
     storeTvShow.$reset();
     storeMovieApp.$reset();
     await router.push({ path: '/' });
+    isVisibleHamburger.value = false;
 };
 
 function hasValue(obj, value) {
