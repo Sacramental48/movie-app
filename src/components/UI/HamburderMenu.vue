@@ -21,10 +21,12 @@ const props = defineProps({
         required: false,
     }
 });
+
 const isActiveTheme = ref(false);
+
 const toggleHamburger = () => {
     isActiveTheme.value = !isActiveTheme.value;
-    emit('isActive-handle', isActiveTheme.value);
+    emit('isActive-handle', !props.isActiveToggle);
 };
 
 const routerPushToContentType = (path) => {

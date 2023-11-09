@@ -18,7 +18,7 @@ const isVisibleHamburger = ref(false);
 const router = useRouter();
 const route = useRoute();
 const headerRef = ref(null);
-const activeTham = ref(null);
+const activeTham = ref(false);
 const searchContent = ref('');
 const inputFocus = ref(null);
 
@@ -132,7 +132,8 @@ const closeInput = (event) => {
 
 const closeHamburger = (event) => {
     if (isVisibleHamburger.value && event.target.tagName !== 'BUTTON' && event.target.tagName !== 'UL' && event.target.tagName !== 'SPAN') {
-        isVisibleHamburger.value = false;
+        isVisibleHamburger.value = !isVisibleHamburger.value;
+        activeTham.value = false;
     }
 };
 
