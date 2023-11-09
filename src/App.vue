@@ -30,7 +30,7 @@ watch(route, (to) => {
     <div :class="{'dark': darkMode}">
         <div class="flex flex-col bg-dim-white dark:bg-dim-dark-gray min-h-screen">
             <TheHeader />
-            <div class="flex-1">
+            <div class="flex-1 mb-14 pt-32">
                 <router-view></router-view>
             </div>
             <div class="flex items-center justify-center fixed bg-dim-gray/60 bottom-4 right-4 cursor-pointer border border-dim-gray rounded-lg h-[42px] w-[42px] z-40" @click="toggleDarkMode">

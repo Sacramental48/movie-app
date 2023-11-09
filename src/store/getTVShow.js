@@ -5,7 +5,7 @@ export const useTVShow = defineStore('TVShow', {
     state: () => ({
         data: [],
         totalPages: 500,
-        sortBy: 'popularity.desc',
+        sortBy: sessionStorage.getItem('sortingTVShow') || 'popularity.desc',
         currentPageSerials: sessionStorage.getItem('currentPageSerials') || 1,
     }),
     getters: {

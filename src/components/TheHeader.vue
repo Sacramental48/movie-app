@@ -18,7 +18,7 @@ const isVisibleHamburger = ref(false);
 const router = useRouter();
 const route = useRoute();
 const headerRef = ref(null);
-const activeTham = ref(null);
+const activeTham = ref(false);
 const searchContent = ref('');
 const inputFocus = ref(null);
 
@@ -58,6 +58,8 @@ const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
+    sessionStorage.setItem('sortingMovie', 'popularity.desc');
+    sessionStorage.setItem('sortingTVShow', 'popularity.desc');
     if(path === 'tv' && storeMovieApp.data.length !== 0) {
         storeMovieApp.$reset();
     }
@@ -74,9 +76,12 @@ const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
+    sessionStorage.setItem('sortingMovie', 'popularity.desc');
+    sessionStorage.setItem('sortingTVShow', 'popularity.desc');
     storeTvShow.$reset();
     storeMovieApp.$reset();
     await router.push({ path: '/' });
+    isVisibleHamburger.value = false;
 };
 
 function hasValue(obj, value) {
@@ -127,7 +132,8 @@ const closeInput = (event) => {
 
 const closeHamburger = (event) => {
     if (isVisibleHamburger.value && event.target.tagName !== 'BUTTON' && event.target.tagName !== 'UL' && event.target.tagName !== 'SPAN') {
-        isVisibleHamburger.value = false;
+        isVisibleHamburger.value = !isVisibleHamburger.value;
+        activeTham.value = false;
     }
 };
 

@@ -110,7 +110,7 @@ const hasTrailerActive = computed(() => {
 </script>
 
 <template>
-    <div class="z-10 pt-32">
+    <div class="z-10">
         <div class="w-full h-screen top-0 left-0 overflow-hidden absolute opacity-10 sm:block hidden">
              <img v-lazy="{ 
                 src: `https://image.tmdb.org/t/p/original${getCurrentData.backdrop_path}`, delay: 300 }" 

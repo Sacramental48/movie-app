@@ -41,16 +41,16 @@ const allOptionName = ref([
     {id: 6, value: 'primary_release_date.asc', name: 'Release Date Ascending',},
 ]);
 
-watch(selectSort, value => {
+watch(selectSort, async value => {
     if(props.data.$id === 'movie') {
+        sessionStorage.setItem('sortingMovie', value)
         storeMovieApp.$reset();
-        props.data.sortBy = value;
-        storeMovieApp.getMovieData();
+        await storeMovieApp.getMovieData();
     }
     if (props.data.$id === 'TVShow') {
+        sessionStorage.setItem('sortingTVShow', value)
         storeTvShow.$reset();
-        props.data.sortBy = value;
-        storeTvShow.getTVShowData();
+        await storeTvShow.getTVShowData();
     }
 });
 
@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
             <font-awesome-icon v-if="isOpenDropDownMenu" :icon="['fas', 'chevron-up']" class="dark:text-dim-white text-dim-dark-gray" />
             <font-awesome-icon v-else :icon="['fas', 'chevron-up']" rotation=180 class="dark:text-dim-white text-dim-dark-gray" />
         </div>
-        <ul v-if="isOpenDropDownMenu" class="absolute left-0 right-0 top-9 z-10 dark:bg-dim-dark-gray bg-gray-200 border-x border-t dark:border-dim-semi-dark-gray border-dim-gray rounded-xl overflow-hidden">
+        <ul v-if="isOpenDropDownMenu" class="absolute w-[232px] right-0 top-9 z-10 dark:bg-dim-dark-gray bg-gray-200 border-x border-t dark:border-dim-semi-dark-gray border-dim-gray rounded-xl overflow-hidden">
             <li v-for="item in allOptionName" :key="item.id" :value="item.id" class="border-b dark:border-dim-semi-dark-gray border-dim-gray dark:text-dim-white text-dim-dark-gray px-2 py-1 hover:bg-dim-black-blur/20" @click="getValueFromSortSection(item.value)">{{item.name}}</li>
         </ul>
     </div>

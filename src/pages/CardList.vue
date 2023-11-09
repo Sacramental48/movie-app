@@ -82,7 +82,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center container pt-32">
+    <div class="flex flex-col justify-center container">
         <Spinner v-if="storeMovieApp.data.length === 0 && storeTvShow.data.length === 0 && storeSearchResult.data.length === 0"></Spinner>
         <div v-else>
             <div class="flex justify-between items-center py-4">
@@ -92,7 +92,7 @@ onUnmounted(() => {
                 </div>
             </div>
             <div class="flex flex-col justify-center w-full items-center">
-                 <div class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="displayData.length !== 0">
+                 <div class="grid xxs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" v-if="displayData.length !== 0">
                     <CardForImages v-for="item in displayData.data" :key="item.id" :item="item" :media="displayData.media" />
                 </div>
                 <div v-for="media in [storeMovieApp, storeTvShow, storeSearchResult]" :key="media.id" >
