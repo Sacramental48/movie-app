@@ -58,6 +58,8 @@ const switchContent = async (path) => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
+    sessionStorage.setItem('sortingMovie', 'popularity.desc');
+    sessionStorage.setItem('sortingTVShow', 'popularity.desc');
     if(path === 'tv' && storeMovieApp.data.length !== 0) {
         storeMovieApp.$reset();
     }
@@ -74,6 +76,8 @@ const switchToHome = async () => {
     sessionStorage.setItem('currentPageMovie', 1);
     sessionStorage.setItem('currentPageSerials', 1);
     sessionStorage.setItem('currentSearchResultPage', 1);
+    sessionStorage.setItem('sortingMovie', 'popularity.desc');
+    sessionStorage.setItem('sortingTVShow', 'popularity.desc');
     storeTvShow.$reset();
     storeMovieApp.$reset();
     await router.push({ path: '/' });

@@ -82,7 +82,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center container pt-32">
+    <div class="flex flex-col justify-center container">
         <Spinner v-if="storeMovieApp.data.length === 0 && storeTvShow.data.length === 0 && storeSearchResult.data.length === 0"></Spinner>
         <div v-else>
             <div class="flex justify-between items-center py-4">

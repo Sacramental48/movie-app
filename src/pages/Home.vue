@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="flex flex-col container pt-32">
+    <div class="flex flex-col container">
         <Spinner v-if="storeTrending.data.length === 0 && storeTopMovie.data.length === 0 && storeTopSerials.data.length === 0"/>
         <div class="flex flex-col" v-else>
             <div class=" flex flex-col items-center justify-center mb-24">

@@ -41,16 +41,16 @@ const allOptionName = ref([
     {id: 6, value: 'primary_release_date.asc', name: 'Release Date Ascending',},
 ]);
 
-watch(selectSort, value => {
+watch(selectSort, async value => {
     if(props.data.$id === 'movie') {
+        sessionStorage.setItem('sortingMovie', value)
         storeMovieApp.$reset();
-        props.data.sortBy = value;
-        storeMovieApp.getMovieData();
+        await storeMovieApp.getMovieData();
     }
     if (props.data.$id === 'TVShow') {
+        sessionStorage.setItem('sortingTVShow', value)
         storeTvShow.$reset();
-        props.data.sortBy = value;
-        storeTvShow.getTVShowData();
+        await storeTvShow.getTVShowData();
     }
 });
 

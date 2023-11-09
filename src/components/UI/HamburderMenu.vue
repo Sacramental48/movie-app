@@ -3,9 +3,11 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useTVShow } from '@/store/getTVShow';
 import { useMovieApp } from '@/store/getMovieApp';
+import { useSearchResult } from '@/store/getSearchResult';
 
 const storeTvShow = useTVShow();
 const storeMovieApp = useMovieApp();
+const storeSearchResult = useSearchResult();
 
 const router = useRouter();
 const emit = defineEmits(['isActive-handle']);
@@ -26,14 +28,17 @@ const toggleHamburger = () => {
 };
 
 const routerPushToContentType = (path) => {
+    sessionStorage.setItem('sortingTVShow', 'popularity.desc');
+    sessionStorage.setItem('sortingMovie', 'popularity.desc');
+    storeSearchResult.$reset();
     if(path === 'movie') {
-        router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
+        router.push({ name: 'contentDetails', params: { contentType: path }});
         isActiveTheme.value = props.isActiveToggle;
         storeTvShow.$reset();
     }
 
     if(path === 'tv') {
-        router.push({ name: 'contentDetails', params: { contentType: path, id: '1' }});
+        router.push({ name: 'contentDetails', params: { contentType: path }});
         isActiveTheme.value = props.isActiveToggle;
         storeMovieApp.$reset();
     }
